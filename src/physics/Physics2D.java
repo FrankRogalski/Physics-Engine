@@ -1,4 +1,4 @@
-package Physics;
+package physics;
 
 import vectors.Vector2D;
 
@@ -10,13 +10,13 @@ public class Physics2D {
     private double maxSpeed;
     private double maxForce;
 
-    private Physics2D(final double x, final double y, final double maxSpeed, final double maxForce) {
+    public Physics2D(final double x, final double y, final double maxSpeed, final double maxForce) {
         location = new Vector2D(x, y);
         this.maxForce = maxForce;
         this.maxSpeed = maxSpeed;
     }
 
-    private Physics2D(final Vector2D location, final double maxSpeed, final double maxForce) {
+    public Physics2D(final Vector2D location, final double maxSpeed, final double maxForce) {
         if (location != null) {
             this.location = new Vector2D(location);
         } else {
@@ -26,7 +26,7 @@ public class Physics2D {
         this.maxSpeed = maxSpeed;
     }
 
-    private Physics2D(final Physics2D physics2D, final double maxSpeed, final double maxForce) {
+    public Physics2D(final Physics2D physics2D, final double maxSpeed, final double maxForce) {
         if (physics2D != null) {
             location = new Vector2D(physics2D.location);
         } else {
@@ -36,7 +36,7 @@ public class Physics2D {
         this.maxSpeed = maxSpeed;
     }
 
-    private Physics2D(final Physics2D physics2D) {
+    public Physics2D(final Physics2D physics2D) {
         if (physics2D != null) {
             location = new Vector2D(physics2D.location);
             velocity = new Vector2D(physics2D.velocity);
@@ -44,7 +44,7 @@ public class Physics2D {
             this.maxForce = physics2D.maxForce;
             this.maxSpeed = physics2D.maxSpeed;
         } else {
-            throw new IllegalArgumentException("The Physics Object cant be null");
+            throw new IllegalArgumentException("The physics Object cant be null");
         }
     }
 
@@ -165,15 +165,15 @@ public class Physics2D {
         return location.getY();
     }
 
-    public double distance(double x, double y) {
+    public double distance(final double x, final double y) {
         return location.distance(x, y);
     }
 
-    public double distance(Vector2D point) {
+    public double distance(final Vector2D point) {
         return location.distance(point);
     }
 
-    public double distance(Physics2D physics2D) {
+    public double distance(final Physics2D physics2D) {
         return location.distance(physics2D.location);
     }
 
