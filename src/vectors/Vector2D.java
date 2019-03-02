@@ -2,12 +2,15 @@ package vectors;
 
 import javafx.geometry.Point2D;
 
+import java.util.Random;
+
 /**
  * A class that represents a vector on a 2D plain
  */
 public class Vector2D {
     private double x;
     private double y;
+    private static Random random = new Random();
 
     /**
      * The standard constructor that initializes all components with 0
@@ -62,6 +65,18 @@ public class Vector2D {
     public void setAll(final double x, final double y) {
         this.x = x;
         this.y = y;
+    }
+
+    public static Vector2D createFromAngle(final double angle) {
+        return createFromAngle(angle, 1);
+    }
+
+    public static Vector2D createFromAngle(final double angle, final double mag) {
+        return new Vector2D(mag * Math.cos(angle), mag * Math.sin(angle));
+    }
+
+    public static Vector2D createRandomVector2D() {
+        return Vector2D.createFromAngle(random.nextDouble() * Math.PI * 2);
     }
 
     /**
@@ -382,41 +397,164 @@ public class Vector2D {
         return Math.sqrt(x * x + y * y);
     }
 
+    public double getMagSquared() {
+        return Vector2D.getMagSquared(x, y);
+    }
+
+    public static double getMagSquared(final Vector2D vector2D) {
+        return vector2D.getMagSquared();
+    }
+
+    public static double getMagSquared(final double x, final double y) {
+        return x * x + y * y;
+    }
+
+    public double getDirection() {
+        return Vector2D.getDirection(x, y);
+    }
+
+    public static double getDirection(final Vector2D vector2D) {
+        return vector2D.getDirection();
+    }
+
+    public static double getDirection(final double x, final double y) {
+        return Math.atan2(x, y);
+    }
+
+    public void limit(final double max) {
+        if (getMagSquared() > max * max) {
+            setMag(max);
+        }
+    }
+
+    public static Vector2D limit(final Vector2D vector2D, final double max) {
+        return limit(vector2D.x, vector2D.y, max);
+    }
+
+    public static Vector2D limit(final double x, final double y, final double max) {
+        final Vector2D vector2D = new Vector2D(x, y);
+        vector2D.limit(max);
+        return vector2D;
+    }
+
+    public Vector2D lerp(final Vector2D vector2D, final double percentage) {
+        return lerp(vector2D.x, vector2D.y, percentage);
+    }
+
+    public Vector2D lerp(final double x, final double y, final double percentage) {
+        return Vector2D.lerp(this.x, this.y, x, y, percentage);
+    }
+
+    public static Vector2D lerp(final Vector2D vector2D1, final Vector2D vector2D2, final double percentage) {
+        return vector2D1.lerp(vector2D2, percentage);
+    }
+
+    public static Vector2D lerp(final double x, final double y, final Vector2D vector2D, final double percentage) {
+        return Vector2D.lerp(x, y, vector2D.x, vector2D.y, percentage);
+    }
+
+    public static Vector2D lerp(final Vector2D vector2D, final double x, final double y, final double percentage) {
+        return vector2D.lerp(x, y, percentage);
+    }
+
+    public static Vector2D lerp(final double x1, final double y1, final double x2, final double y2, final double percentage) {
+        return new Vector2D(x1 + (x1 - x2) * percentage, y1 + (y1 - y2) * percentage);
+    }
+
+    /**
+     * Sets the magnitude of this vector
+     *
+     * @param mag The magnitude the vector should be changed to
+     */
     public void setMag(final double mag) {
         normalize();
         mult(mag);
     }
 
+    /**
+     * Returns a new vector with the angle of the given one and the given magnitude
+     *
+     * @param vector2D The vector which angle will be copied
+     * @param mag      The magnitude which the new vector will have
+     * @return A new vector with the angle of the given one and the given magnitude
+     */
     public static Vector2D setMag(final Vector2D vector2D, final double mag) {
         return Vector2D.setMag(vector2D.x, vector2D.y, mag);
     }
 
+    /**
+     * Returns a new vector with the angle that the x and y components would form and the given magnitude
+     *
+     * @param x   The x component of the vector which angle will be copied
+     * @param y   The y component of the vector which angle will be copied
+     * @param mag The magnitude which the new vector will have
+     * @return A new vector with the angle that the x and y components would form and the given magnitude
+     */
     public static Vector2D setMag(final double x, final double y, final double mag) {
         final Vector2D vector2D = new Vector2D(x, y);
         vector2D.setMag(mag);
         return vector2D;
     }
 
+    /**
+     * Returns the vector in the middle of this one and the given one
+     *
+     * @param vector2D One of the vectors between which the midpoint is located
+     * @return The midpoint between the two vectors
+     */
     public Vector2D midpoint(final Vector2D vector2D) {
         return midpoint(vector2D.x, vector2D.y);
     }
 
+    /**
+     * Returns the vector in the middle of this one and the given x and y coordinates
+     *
+     * @param x The x component of the vector
+     * @param y The y component of the Vector
+     * @return The midpoint between the two vectors
+     */
     public Vector2D midpoint(final double x, final double y) {
         return Vector2D.midpoint(this.x, this.y, x, y);
     }
 
+    /**
+     * Returns the midpoint of the two given vectors
+     * @param vector2D1 One of the vectors between which the midpoint is located
+     * @param vector2D2 One of the vectors between which the midpoint is located
+     * @return The midpoint of the two given vectors
+     */
     public static Vector2D midpoint(final Vector2D vector2D1, final Vector2D vector2D2) {
         return vector2D1.midpoint(vector2D2);
     }
 
+    /**
+     * Returns the midpoint between the given vector and the x and y components which represent a vector
+     * @param vector2D One of the vectors between which the midpoint is located
+     * @param x The x component of the other vector
+     * @param y The x component of the other vector
+     * @return The midpoint between the given vector and the x and y components which represent a vector
+     */
     public static Vector2D midpoint(final Vector2D vector2D, final double x, final double y) {
         return vector2D.midpoint(x, y);
     }
 
+    /**
+     * Returns the midpoint between the x and y components which are representing vectors
+     * @param x1 The x component representing the first vector
+     * @param y1 The y component representing the first vector
+     * @param x2 The x component representing the second vector
+     * @param y2 The y component representing the second vector
+     * @return The midpoint between the x and y components which are representing vectors
+     */
     public static Vector2D midpoint(final double x1, final double y1, final double x2, final double y2) {
         return new Vector2D(x2 + (x1 + x2) / 2, y2 + (y1 + y2) / 2);
     }
 
+    /**
+     * Calculates the dot product of this vector and another one
+     * @param vector2D The vector with wich the dot product is calculated
+     * @return The dot Product of the two vectors
+     */
     public double dotProduct(final Vector2D vector2D) {
         return dotProduct(vector2D.x, vector2D.y);
     }
@@ -437,43 +575,19 @@ public class Vector2D {
         return x1 * x2 + y1 * y2;
     }
 
-    public Vector3D crossProduct(final Vector2D vector2D) {
-        return crossProduct(vector2D.x, vector2D.y);
+    public double getAngle() {
+        return getAngle(1, 0);
     }
 
-    public Vector3D crossProduct(final double x, final double y) {
-        return Vector2D.crossProduct(this.x, this.y, x, y);
+    public double getAngle(final Vector2D vector2D) {
+        return getAngle(vector2D.x, vector2D.y);
     }
 
-    public static Vector3D crossProduct(final Vector2D vector2D1, final Vector2D vector2D2) {
-        return vector2D1.crossProduct(vector2D2);
+    public double getAngle(final double x, final double y) {
+        return Vector2D.getAngle(this.x, this.y, x, y);
     }
 
-    public static Vector3D crossProduct(final Vector2D vector2D, final double x, final double y) {
-        return vector2D.crossProduct(x, y);
-    }
-
-    public static Vector3D crossProduct(final double x, final double y, final Vector2D vector2D) {
-        return Vector2D.crossProduct(x, y, vector2D.x, vector2D.y);
-    }
-
-    public static Vector3D crossProduct(final double x1, final double y1, final double x2, final double y2) {
-        return new Vector3D(0, 0, x1 * y2 - y1 * x2);
-    }
-
-    public double getAbsoluteAngle() {
-        return getAbsoluteAngle(1, 0);
-    }
-
-    public double getAbsoluteAngle(final Vector2D vector2D) {
-        return getAbsoluteAngle(vector2D.x, vector2D.y);
-    }
-
-    public double getAbsoluteAngle(final double x, final double y) {
-        return Vector2D.getAbsoluteAngle(this.x, this.y, x, y);
-    }
-
-    public static double getAbsoluteAngle(final double x1, final double y1, final double x2, final double y2) {
+    public static double getAngle(final double x1, final double y1, final double x2, final double y2) {
         final double delta = (x1 * x2 + y1 * y2) / Math.sqrt((x1 * x1 + y1 * y1) * (x2 * x2 + y2 * y2));
         if (delta > 1) {
             return 0;
