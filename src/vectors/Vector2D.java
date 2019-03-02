@@ -11,6 +11,7 @@ public class Vector2D {
     private double x;
     private double y;
     private static Random random = new Random();
+    private static final double HALF_PI = Math.PI / 2;
 
     /**
      * The standard constructor that initializes all components with 0
@@ -34,6 +35,7 @@ public class Vector2D {
      *
      * @param vector2D The vector that you want to copy
      */
+    @SuppressWarnings("CopyConstructorMissesField")
     public Vector2D(final Vector2D vector2D) {
         setAllComponents(vector2D);
     }
@@ -235,7 +237,7 @@ public class Vector2D {
      *
      * @param factor The factor by which the vector will be multiplied
      */
-    public void mult(final double factor) {
+    public void multiply(final double factor) {
         x *= factor;
         y *= factor;
     }
@@ -247,8 +249,8 @@ public class Vector2D {
      * @param factor   The factor by which the vector will be multiplied
      * @return The resulting vector from the multiplication
      */
-    public static Vector2D mult(final Vector2D vector2D, final double factor) {
-        return Vector2D.mult(vector2D.x, vector2D.y, factor);
+    public static Vector2D multiply(final Vector2D vector2D, final double factor) {
+        return Vector2D.multiply(vector2D.x, vector2D.y, factor);
     }
 
     /**
@@ -259,9 +261,9 @@ public class Vector2D {
      * @param factor The factor by which the vector will be multiplied
      * @return The resulting vector from the multiplication
      */
-    public static Vector2D mult(final double x, final double y, final double factor) {
+    public static Vector2D multiply(final double x, final double y, final double factor) {
         final Vector2D vector2D = new Vector2D(x, y);
-        vector2D.mult(factor);
+        vector2D.multiply(factor);
         return vector2D;
     }
 
@@ -380,7 +382,18 @@ public class Vector2D {
      * @return The resulting new vector with a magnitude of one
      */
     public static Vector2D normalize(final Vector2D vector2D) {
-        final Vector2D vector2D1 = new Vector2D(vector2D);
+        return Vector2D.normalize(vector2D.x, vector2D.y);
+    }
+
+    /**
+     * Creates a new vector based on the given x and y components with magnitude one
+     *
+     * @param x The x component of the vector
+     * @param y The y component of the vector
+     * @return The resulting new vector with a magnitude of one
+     */
+    public static Vector2D normalize(final double x, final double y) {
+        final Vector2D vector2D1 = new Vector2D(x, y);
         vector2D1.normalize();
         return vector2D1;
     }
@@ -471,7 +484,7 @@ public class Vector2D {
      * @return The rotation of the vector represented by the given x and y component
      */
     public static double getDirection(final double x, final double y) {
-        return Math.atan2(x, y);
+        return Math.atan2(x, y) - HALF_PI;
     }
 
     /**
@@ -585,7 +598,7 @@ public class Vector2D {
      * @return The resulting vector
      */
     public static Vector2D lerp(final double x1, final double y1, final double x2, final double y2, final double percentage) {
-        return new Vector2D(x1 + (x1 - x2) * percentage, y1 + (y1 - y2) * percentage);
+        return new Vector2D(x1 + (x2 - x1) * percentage, y1 + (y2 - y1) * percentage);
     }
 
     /**
@@ -595,7 +608,7 @@ public class Vector2D {
      */
     public void setMag(final double mag) {
         normalize();
-        mult(mag);
+        multiply(mag);
     }
 
     /**
@@ -677,13 +690,13 @@ public class Vector2D {
      * @return The midpoint between the x and y components which are representing vectors
      */
     public static Vector2D midpoint(final double x1, final double y1, final double x2, final double y2) {
-        return new Vector2D(x2 + (x1 + x2) / 2, y2 + (y1 + y2) / 2);
+        return new Vector2D((x1 + x2) / 2, (y1 + y2) / 2);
     }
 
     /**
      * Calculates the dot product of this vector and another one
      *
-     * @param vector2D The vector with wich the dot product is calculated
+     * @param vector2D The vector with which the dot product is calculated
      * @return The dot Product of the two vectors
      */
     public double dotProduct(final Vector2D vector2D) {
@@ -731,7 +744,7 @@ public class Vector2D {
      * @param y1 The y component of the first vector
      * @param x2 The x component of the second vector
      * @param y2 The y component of the second vector
-     * @return
+     * @return The dot Product of the two vectors
      */
     public static double dotProduct(final double x1, final double y1, final double x2, final double y2) {
         return x1 * x2 + y1 * y2;
@@ -748,7 +761,7 @@ public class Vector2D {
     }
 
     /**
-     * Returns the absolute angle between the given vector and the given x and y component representing a vector
+     * Returns the absolute angle between this vector and the given x and y component representing a vector
      *
      * @param x The x component of the vector
      * @param y The y component of the vector
@@ -756,6 +769,29 @@ public class Vector2D {
      */
     public double getAbsoluteAngle(final double x, final double y) {
         return Vector2D.getAbsoluteAngle(this.x, this.y, x, y);
+    }
+
+    /**
+     * Returns the absolute angle between the given vectors
+     *
+     * @param vector2D1 The vector from which the angle is calculated
+     * @param vector2D2 The vector to which the angle is calculated
+     * @return The resulting angle in radians
+     */
+    public static double getAbsoluteAngle(final Vector2D vector2D1, final Vector2D vector2D2) {
+        return vector2D1.getAbsoluteAngle(vector2D2);
+    }
+
+    /**
+     * Returns the absolute angle between the given vector and the given x and y component representing a vector
+     *
+     * @param vector2D The vector from which the angle is calculated
+     * @param x        The x component of the second vector
+     * @param y        The y component of the second vector
+     * @return The resulting angle in radians
+     */
+    public static double getAbsoluteAngle(final Vector2D vector2D, final double x, final double y) {
+        return vector2D.getAbsoluteAngle(x, y);
     }
 
     /**
@@ -786,7 +822,8 @@ public class Vector2D {
     public void rotate(final double radians) {
         final double newAngle = getDirection() + radians;
         final double mag = getMag();
-        setAllComponents(Math.cos(newAngle) * mag, Math.sin(newAngle) * mag);
+        x = Math.cos(newAngle) * mag;
+        y = Math.sin(newAngle) * mag;
     }
 
     /**

@@ -96,27 +96,27 @@ public class Physics2D {
         move(moveTo.location, weight, true);
     }
 
-    public void move(final Physics2D moveTo, final double weight, final boolean aviod) {
-        move(moveTo.location, weight, aviod);
+    public void move(final Physics2D moveTo, final double weight, final boolean avoid) {
+        move(moveTo.location, weight, avoid);
     }
 
-    public void move(final double x, final double y, final double weight, final boolean aviod) {
-        move(new Vector2D(x, y), weight, aviod);
+    public void move(final double x, final double y, final double weight, final boolean avoid) {
+        move(new Vector2D(x, y), weight, avoid);
     }
 
-    public void move(final Vector2D moveTo, final double weight, final boolean aviod) {
+    public void move(final Vector2D moveTo, final double weight, final boolean avoid) {
         final Vector2D move = new Vector2D(moveTo);
         //desired
         move.sub(location);
-        move.setMag(maxSpeed);
+        move.limit(maxSpeed);
         //steer
         move.sub(velocity);
         move.limit(maxForce);
-        move.mult(weight);
+        move.multiply(weight);
 
         // reverse direction when avoiding something
-        if (aviod) {
-            move.mult(-1);
+        if (avoid) {
+            move.multiply(-1);
         }
         //apply the force
         acceleration.add(move);
