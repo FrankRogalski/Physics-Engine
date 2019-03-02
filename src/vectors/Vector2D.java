@@ -16,7 +16,7 @@ public class Vector2D {
      * The standard constructor that initializes all components with 0
      */
     public Vector2D() {
-        setAll(0);
+        setAllComponents(0);
     }
 
     /**
@@ -26,7 +26,7 @@ public class Vector2D {
      * @param y The y component of your Vector
      */
     public Vector2D(final double x, final double y) {
-        setAll(x, y);
+        setAllComponents(x, y);
     }
 
     /**
@@ -35,7 +35,7 @@ public class Vector2D {
      * @param vector2D The vector that you want to copy
      */
     public Vector2D(final Vector2D vector2D) {
-        setAll(vector2D);
+        setAllComponents(vector2D);
     }
 
     /**
@@ -43,8 +43,8 @@ public class Vector2D {
      *
      * @param vector2D The vector which components will be replicated
      */
-    public void setAll(final Vector2D vector2D) {
-        setAll(vector2D.x, vector2D.y);
+    public void setAllComponents(final Vector2D vector2D) {
+        setAllComponents(vector2D.x, vector2D.y);
     }
 
     /**
@@ -52,8 +52,8 @@ public class Vector2D {
      *
      * @param val The value that all components will have
      */
-    public void setAll(final double val) {
-        setAll(val, val);
+    public void setAllComponents(final double val) {
+        setAllComponents(val, val);
     }
 
     /**
@@ -62,19 +62,37 @@ public class Vector2D {
      * @param x The value your x components will change to
      * @param y The value your y components will change to
      */
-    public void setAll(final double x, final double y) {
+    public void setAllComponents(final double x, final double y) {
         this.x = x;
         this.y = y;
     }
 
+    /**
+     * Creates a unit vector from the given angle
+     *
+     * @param angle The angle in radians that the vector should be at
+     * @return The created vector
+     */
     public static Vector2D createFromAngle(final double angle) {
         return createFromAngle(angle, 1);
     }
 
+    /**
+     * Creates a vector from the given angle with the given magnitude
+     *
+     * @param angle The angle in radians that the vector should be at
+     * @param mag   The Magnitude of the vector that will be created
+     * @return The created vector
+     */
     public static Vector2D createFromAngle(final double angle, final double mag) {
         return new Vector2D(mag * Math.cos(angle), mag * Math.sin(angle));
     }
 
+    /**
+     * Creates a unit vector with a random angle
+     *
+     * @return The created vector
+     */
     public static Vector2D createRandomVector2D() {
         return Vector2D.createFromAngle(random.nextDouble() * Math.PI * 2);
     }
@@ -344,7 +362,7 @@ public class Vector2D {
     }
 
     /**
-     * Sets the length of this vector to one
+     * Sets the magnitude of this vector to one
      */
     public void normalize() {
         final double mag = getMag();
@@ -356,10 +374,10 @@ public class Vector2D {
     }
 
     /**
-     * Creates a new vector based on the given one with length one
+     * Creates a new vector based on the given one with magnitude one
      *
      * @param vector2D The vector which will be copied
-     * @return The resulting new vector with a length of one
+     * @return The resulting new vector with a magnitude of one
      */
     public static Vector2D normalize(final Vector2D vector2D) {
         final Vector2D vector2D1 = new Vector2D(vector2D);
@@ -368,95 +386,204 @@ public class Vector2D {
     }
 
     /**
-     * Returns The length of this vector
+     * Returns The magnitude of this vector
      *
-     * @return The length of this vector
+     * @return The magnitude of this vector
      */
     public double getMag() {
         return Vector2D.getMag(x, y);
     }
 
     /**
-     * Returns the length of the given vector
+     * Returns the magnitude of the given vector
      *
-     * @param vector2D The vector which length you want to find out
-     * @return The length of the given vector
+     * @param vector2D The vector which magnitude you want to find out
+     * @return The magnitude of the given vector
      */
     public static double getMag(final Vector2D vector2D) {
         return vector2D.getMag();
     }
 
     /**
-     * Returns the length that a vector with these components would have
+     * Returns the magnitude that a vector with these components would have
      *
      * @param x The x component of the vector
      * @param y The y component of the vector
-     * @return The length that the vector would have
+     * @return The magnitude that the vector would have
      */
     public static double getMag(final double x, final double y) {
         return Math.sqrt(x * x + y * y);
     }
 
+    /**
+     * Returns the Squared magnitude of this vector, which is computationally faster than the real magnitude
+     *
+     * @return The Squared magnitude of this vector
+     */
     public double getMagSquared() {
         return Vector2D.getMagSquared(x, y);
     }
 
+    /**
+     * Returns the Squared magnitude of the given vector, which is computationally faster than the real magnitude
+     *
+     * @param vector2D The vector which squared magnitude is calculated
+     * @return The Squared magnitude of the vector
+     */
     public static double getMagSquared(final Vector2D vector2D) {
         return vector2D.getMagSquared();
     }
 
+    /**
+     * Returns the Squared magnitude of the given x and y components, which is computationally faster than the real magnitude
+     *
+     * @param x The x component of the vector
+     * @param y The y component of the vector
+     * @return The Squared magnitude of the vector
+     */
     public static double getMagSquared(final double x, final double y) {
         return x * x + y * y;
     }
 
+    /**
+     * Returns the rotation of this vector
+     *
+     * @return The rotation of this vector
+     */
     public double getDirection() {
         return Vector2D.getDirection(x, y);
     }
 
+    /**
+     * Returns the rotation of the given vector
+     *
+     * @return The rotation of the given vector
+     */
     public static double getDirection(final Vector2D vector2D) {
         return vector2D.getDirection();
     }
 
+    /**
+     * Returns the rotation of the vector represented by the given x and y component
+     *
+     * @param x The x component of the vector
+     * @param y The y component of the vector
+     * @return The rotation of the vector represented by the given x and y component
+     */
     public static double getDirection(final double x, final double y) {
         return Math.atan2(x, y);
     }
 
+    /**
+     * Sets the length of this vector to the maximum,
+     * if it happens to be longer
+     *
+     * @param max The maximum magnitude of the vector
+     */
     public void limit(final double max) {
         if (getMagSquared() > max * max) {
             setMag(max);
         }
     }
 
+    /**
+     * Sets the length of the given vector without changing it to the maximum and returns it as a new vector,
+     * if it happens to be longer
+     *
+     * @param vector2D The vector which length might be to long
+     * @param max      The maximum magnitude of the vector
+     * @return The vector with the maximum length that yoi specified
+     */
     public static Vector2D limit(final Vector2D vector2D, final double max) {
         return limit(vector2D.x, vector2D.y, max);
     }
 
+    /**
+     * Sets the length of the given x and y component, which represent a vector,
+     * to the maximum and returns it as a new vector, if it happens to be longer
+     *
+     * @param x   The x component of the vector
+     * @param y   The y component of the vector
+     * @param max The maximum magnitude of the vector
+     * @return The vector with the maximum length that yoi specified
+     */
     public static Vector2D limit(final double x, final double y, final double max) {
         final Vector2D vector2D = new Vector2D(x, y);
         vector2D.limit(max);
         return vector2D;
     }
 
+    /**
+     * Linearly interpolates this vector to the given vector
+     *
+     * @param vector2D   The vector to which will be lerped
+     * @param percentage The amount of interpolation from 0 to 1
+     * @return The resulting vector
+     */
     public Vector2D lerp(final Vector2D vector2D, final double percentage) {
         return lerp(vector2D.x, vector2D.y, percentage);
     }
 
+    /**
+     * Linearly interpolates this vector to the given x and y component representing a vector
+     *
+     * @param x          The x component of the vector to which will be lerped
+     * @param y          The y component of the vector to which will be lerped
+     * @param percentage The amount of interpolation from 0 to 1
+     * @return The resulting vector
+     */
     public Vector2D lerp(final double x, final double y, final double percentage) {
         return Vector2D.lerp(this.x, this.y, x, y, percentage);
     }
 
+    /**
+     * Linearly interpolates between the given vectors
+     *
+     * @param vector2D1  The vector from which will be lerped
+     * @param vector2D2  The vector to which will be lerped
+     * @param percentage The amount of interpolation from 0 to 1
+     * @return The resulting vector
+     */
     public static Vector2D lerp(final Vector2D vector2D1, final Vector2D vector2D2, final double percentage) {
         return vector2D1.lerp(vector2D2, percentage);
     }
 
+    /**
+     * Linearly interpolates the given vector to the given x and y component representing a vector
+     *
+     * @param x          The x component of the vector from which will be lerped
+     * @param y          The y component of the vector from which will be lerped
+     * @param vector2D   The vector to which will be lerped
+     * @param percentage The amount of interpolation from 0 to 1
+     * @return The resulting vector
+     */
     public static Vector2D lerp(final double x, final double y, final Vector2D vector2D, final double percentage) {
         return Vector2D.lerp(x, y, vector2D.x, vector2D.y, percentage);
     }
 
+    /**
+     * Linearly interpolates from the given vector to the given x and y component representing a vector
+     *
+     * @param vector2D   The vector from which will be lerped
+     * @param x          The x component of the vector to which will be lerped
+     * @param y          The y component of the vector to which will be lerped
+     * @param percentage The amount of interpolation from 0 to 1
+     * @return The resulting vector
+     */
     public static Vector2D lerp(final Vector2D vector2D, final double x, final double y, final double percentage) {
         return vector2D.lerp(x, y, percentage);
     }
 
+    /**
+     * Linearly interpolates the given x and y components
+     *
+     * @param x1         The x component of the vector from which will be lerped
+     * @param y1         The y component of the vector from which will be lerped
+     * @param x2         The x component of the vector to which will be lerped
+     * @param y2         The y component of the vector to which will be lerped
+     * @param percentage The amount of interpolation from 0 to 1
+     * @return The resulting vector
+     */
     public static Vector2D lerp(final double x1, final double y1, final double x2, final double y2, final double percentage) {
         return new Vector2D(x1 + (x1 - x2) * percentage, y1 + (y1 - y2) * percentage);
     }
@@ -464,7 +591,7 @@ public class Vector2D {
     /**
      * Sets the magnitude of this vector
      *
-     * @param mag The magnitude the vector should be changed to
+     * @param mag The magnitude the vector will be changed to
      */
     public void setMag(final double mag) {
         normalize();
@@ -519,6 +646,7 @@ public class Vector2D {
 
     /**
      * Returns the midpoint of the two given vectors
+     *
      * @param vector2D1 One of the vectors between which the midpoint is located
      * @param vector2D2 One of the vectors between which the midpoint is located
      * @return The midpoint of the two given vectors
@@ -529,9 +657,10 @@ public class Vector2D {
 
     /**
      * Returns the midpoint between the given vector and the x and y components which represent a vector
+     *
      * @param vector2D One of the vectors between which the midpoint is located
-     * @param x The x component of the other vector
-     * @param y The x component of the other vector
+     * @param x        The x component of the other vector
+     * @param y        The x component of the other vector
      * @return The midpoint between the given vector and the x and y components which represent a vector
      */
     public static Vector2D midpoint(final Vector2D vector2D, final double x, final double y) {
@@ -540,6 +669,7 @@ public class Vector2D {
 
     /**
      * Returns the midpoint between the x and y components which are representing vectors
+     *
      * @param x1 The x component representing the first vector
      * @param y1 The y component representing the first vector
      * @param x2 The x component representing the second vector
@@ -552,6 +682,7 @@ public class Vector2D {
 
     /**
      * Calculates the dot product of this vector and another one
+     *
      * @param vector2D The vector with wich the dot product is calculated
      * @return The dot Product of the two vectors
      */
@@ -559,35 +690,84 @@ public class Vector2D {
         return dotProduct(vector2D.x, vector2D.y);
     }
 
+    /**
+     * Calculates the dot product of this vector and the given x and y component representing a second vector
+     *
+     * @param x The x component of the second vector
+     * @param y The y component of the second vector
+     * @return The dot Product of the two vectors
+     */
     public double dotProduct(final double x, final double y) {
         return Vector2D.dotProduct(this.x, this.y, x, y);
     }
 
+    /**
+     * Calculates the dot product of the given vectors
+     *
+     * @param vector2D1 The first vector
+     * @param vector2D2 The second vector
+     * @return The dot Product of the two vectors
+     */
     public static double dotProduct(final Vector2D vector2D1, final Vector2D vector2D2) {
         return vector2D1.dotProduct(vector2D2);
     }
 
+    /**
+     * Calculates the dot product of the given vector and the given x and y component representing a second vector
+     *
+     * @param vector2D The first vector
+     * @param x        The x component of the second vector
+     * @param y        The y component of the second vector
+     * @return The dot Product of the two vectors
+     */
     public static double dotProduct(final Vector2D vector2D, final double x, final double y) {
         return vector2D.dotProduct(x, y);
     }
 
+    /**
+     * Calculates the dot product of the given x and y components
+     *
+     * @param x1 The x component of the first vector
+     * @param y1 The y component of the first vector
+     * @param x2 The x component of the second vector
+     * @param y2 The y component of the second vector
+     * @return
+     */
     public static double dotProduct(final double x1, final double y1, final double x2, final double y2) {
         return x1 * x2 + y1 * y2;
     }
 
-    public double getAngle() {
-        return getAngle(1, 0);
+    /**
+     * Returns the absolute angle between this vector and the given one
+     *
+     * @param vector2D The vector to which the angle is calculated
+     * @return The resulting angle in radians
+     */
+    public double getAbsoluteAngle(final Vector2D vector2D) {
+        return getAbsoluteAngle(vector2D.x, vector2D.y);
     }
 
-    public double getAngle(final Vector2D vector2D) {
-        return getAngle(vector2D.x, vector2D.y);
+    /**
+     * Returns the absolute angle between the given vector and the given x and y component representing a vector
+     *
+     * @param x The x component of the vector
+     * @param y The y component of the vector
+     * @return The resulting angle in radians
+     */
+    public double getAbsoluteAngle(final double x, final double y) {
+        return Vector2D.getAbsoluteAngle(this.x, this.y, x, y);
     }
 
-    public double getAngle(final double x, final double y) {
-        return Vector2D.getAngle(this.x, this.y, x, y);
-    }
-
-    public static double getAngle(final double x1, final double y1, final double x2, final double y2) {
+    /**
+     * Returns the absolute angle between the given x and y components
+     *
+     * @param x1 The x component of the first vector
+     * @param y1 The y component of the first vector
+     * @param x2 The x component of the second vector
+     * @param y2 The y component of the second vector
+     * @return The resulting angle in radians
+     */
+    public static double getAbsoluteAngle(final double x1, final double y1, final double x2, final double y2) {
         final double delta = (x1 * x2 + y1 * y2) / Math.sqrt((x1 * x1 + y1 * y1) * (x2 * x2 + y2 * y2));
         if (delta > 1) {
             return 0;
@@ -598,61 +778,104 @@ public class Vector2D {
         return Math.acos(delta);
     }
 
-    public void rotate(final Vector2D vector2D, double radians) {
-        rotate(vector2D.x, vector2D.y, radians);
+    /**
+     * Rotates this vector by the given angle
+     *
+     * @param radians The radians the vector will be turned
+     */
+    public void rotate(final double radians) {
+        final double newAngle = getDirection() + radians;
+        final double mag = getMag();
+        setAllComponents(Math.cos(newAngle) * mag, Math.sin(newAngle) * mag);
     }
 
-    public void rotate(final double x, final double y, double radians) {
-        final double s = Math.sin(radians);
-        final double c = Math.cos(radians);
-        sub(x, y);
-        setAll(this.x * c - this.y * s,
-                this.x * s + this.y * c);
-        add(x, y);
+    /**
+     * Rotates the given vector by the given angle
+     *
+     * @param vector2D The vector which will be turned
+     * @param radians  The radians the vector will be turned
+     * @return The resulting vector
+     */
+    public static Vector2D rotate(final Vector2D vector2D, final double radians) {
+        return Vector2D.rotate(vector2D.x, vector2D.y, radians);
     }
 
-    public static Vector2D rotate(final Vector2D vector2D1, final Vector2D vector2D2, double radians) {
-        return Vector2D.rotate(vector2D1.x, vector2D1.y, vector2D2.x, vector2D2.y, radians);
-    }
-
-    public static Vector2D rotate(final Vector2D vector2D, final double x, final double y, double radians) {
-        return Vector2D.rotate(vector2D.x, vector2D.y, x, y, radians);
-    }
-
-    public static Vector2D rotate(final double x, final double y, final Vector2D vector2D, double radians) {
-        return Vector2D.rotate(x, y, vector2D.x, vector2D.y, radians);
-    }
-
-    public static Vector2D rotate(final double x1, final double y1, final double x2, final double y2, double radians) {
-        final Vector2D vector2D = new Vector2D(x1, y1);
-        vector2D.rotate(x2, y2, radians);
+    /**
+     * Rotates the given x and y components representing a vector by the given angle
+     *
+     * @param x       The x component of the vector
+     * @param y       The y component of the vector
+     * @param radians The radians the vector will be turned
+     * @return The resulting vector
+     */
+    public static Vector2D rotate(final double x, final double y, final double radians) {
+        final Vector2D vector2D = new Vector2D(x, y);
+        vector2D.rotate(radians);
         return vector2D;
     }
 
+    /**
+     * Converts this vector to a JavaFx Point2D
+     *
+     * @return The new Point2D
+     */
     public Point2D toPoint2D() {
-        return new Point2D(x, y);
+        return Vector2D.toPoint2D(x, y);
     }
 
+    /**
+     * Converts the given vector to a JavaFx Point2D
+     *
+     * @param vector2D The vector that will be converted to a Point2D
+     * @return The new Point2D
+     */
     public static Point2D toPoint2D(final Vector2D vector2D) {
-        return new Point2D(vector2D.x, vector2D.y);
+        return vector2D.toPoint2D();
     }
 
+    /**
+     * Converts the x and y components to a JavaFx Point2D
+     *
+     * @param x The x component of the point
+     * @param y The y component of the point
+     * @return The new Point2D
+     */
     public static Point2D toPoint2D(final double x, final double y) {
         return new Point2D(x, y);
     }
 
+    /**
+     * Returns the x component of the Vector
+     *
+     * @return The x component of the Vector
+     */
     public double getX() {
         return x;
     }
 
+    /**
+     * Sets the x component of the Vector
+     *
+     * @param x The x component the vector should be set to
+     */
     public void setX(final double x) {
         this.x = x;
     }
 
+    /**
+     * Returns the y component of the Vector
+     *
+     * @return The y component of the Vector
+     */
     public double getY() {
         return y;
     }
 
+    /**
+     * Sets the y component of the Vector
+     *
+     * @param y The y component the vector should be set to
+     */
     public void setY(final double y) {
         this.y = y;
     }

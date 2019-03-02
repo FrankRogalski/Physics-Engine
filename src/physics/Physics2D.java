@@ -111,9 +111,7 @@ public class Physics2D {
         move.setMag(maxSpeed);
         //steer
         move.sub(velocity);
-        if (move.getMag() > maxForce) {
-            move.setMag(maxForce);
-        }
+        move.limit(maxForce);
         move.mult(weight);
 
         // reverse direction when avoiding something
@@ -126,15 +124,13 @@ public class Physics2D {
 
     public void updatePosition() {
         velocity.add(acceleration);
-        if (velocity.getMag() > maxSpeed) {
-            velocity.setMag(maxSpeed);
-        }
+        velocity.limit(maxSpeed);
         location.add(velocity);
-        acceleration.setAll(0);
+        acceleration.setAllComponents(0);
     }
 
     public void setLocation(final double x, final double y) {
-        location.setAll(x, y);
+        location.setAllComponents(x, y);
     }
 
     public void setLocation(final Vector2D vector2D) {
