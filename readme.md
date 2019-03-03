@@ -116,7 +116,7 @@ This class is a Java port of the physics that Daniel Shiffman implements in his 
 I therefore highly recommend watching his tutorial series about autonomous agents if you want an
 in depth understanding of the topic.
 
-tutorial series: https://www.youtube.com/playlist?list=PLRqwX-V7Uu6YHt0dtyf4uiw8tKOxQLvlW
+* tutorial series: https://www.youtube.com/playlist?list=PLRqwX-V7Uu6YHt0dtyf4uiw8tKOxQLvlW
 
 Here is also a rough overview of how to work with physics objects.
 A physics object (from here on called agent) stores 5 essential values
