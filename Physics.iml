@@ -20,5 +20,6 @@
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="library" name="org.mockito:mockito-core:2.24.5" level="project" />
   </component>
 </module>

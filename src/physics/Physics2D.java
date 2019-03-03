@@ -199,12 +199,27 @@ public class Physics2D {
     /**
      * Commands the agent to seek a specific point
      *
-     * @param moveTo The physics object of the agent which will be chased
+     * @param x      The x component of the Point that will be chased
+     * @param y      The y component of the Point that will be chased
      * @param weight The rating of the importance of the target
      * @param avoid  Commands if the target will be chased or avoided
      */
-    public void move(final Physics2D moveTo, final double weight, final boolean avoid) {
-        move(moveTo.location, weight, avoid);
+    public void move(final double x, final double y, final double weight, final boolean avoid) {
+        final Vector2D moveTo = new Vector2D(x, y);
+        //desired
+        moveTo.sub(location);
+        moveTo.setMag(maxSpeed);
+        //steer
+        moveTo.sub(velocity);
+        moveTo.limit(maxForce);
+        moveTo.multiply(weight);
+
+        // reverse direction when avoiding something
+        if (avoid) {
+            moveTo.multiply(-1);
+        }
+        //apply the force
+        acceleration.add(moveTo);
     }
 
     /**
@@ -221,34 +236,18 @@ public class Physics2D {
     /**
      * Commands the agent to seek a specific point
      *
-     * @param x      The x component of the Point that will be chased
-     * @param y      The y component of the Point that will be chased
+     * @param moveTo The physics object of the agent which will be chased
      * @param weight The rating of the importance of the target
      * @param avoid  Commands if the target will be chased or avoided
      */
-    public void move(final double x, final double y, final double weight, final boolean avoid) {
-        final Vector2D moveTo = new Vector2D(x, y);
-        //desired
-        moveTo.sub(location);
-        moveTo.limit(maxSpeed);
-        //steer
-        moveTo.sub(velocity);
-        moveTo.setMag(maxForce);
-        moveTo.multiply(weight);
-
-        // reverse direction when avoiding something
-        if (avoid) {
-            moveTo.multiply(-1);
-        }
-        //apply the force
-        acceleration.add(moveTo);
+    public void move(final Physics2D moveTo, final double weight, final boolean avoid) {
+        move(moveTo.location, weight, avoid);
     }
 
     /**
      * Updates the position of the agent after all targets have been taken into consideration
      */
     public void updatePosition() {
-        acceleration.limit(maxForce);
         velocity.add(acceleration);
         velocity.limit(maxSpeed);
         location.add(velocity);
@@ -363,6 +362,14 @@ public class Physics2D {
      */
     public Vector2D getVelocity() {
         return new Vector2D(velocity);
+    }
+
+    /**
+     * Returns the acceleration of the agent
+     * @return The acceleration of the agent
+     */
+    public Vector2D getAcceleration() {
+        return new Vector2D(acceleration);
     }
 
     /**
