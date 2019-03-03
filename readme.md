@@ -38,8 +38,8 @@ If you are having trouble following the rules don't hesitate contacting me via a
 If you are interested in the code just clone this repository (here is a link that shows you how to do that).
 otherwise you can just use this link to download the jar (link). How you can include the libraries into your project
 is shown in the following videos
-Eclipse: https://www.youtube.com/watch?v=3aYYrzl3xzk
-IntelliJ: https://www.youtube.com/watch?v=QAJ09o3Xl_0
+* Eclipse: https://www.youtube.com/watch?v=3aYYrzl3xzk
+* IntelliJ: https://www.youtube.com/watch?v=QAJ09o3Xl_0
 
 ## How to use the Library
 ### Vector2D
@@ -48,68 +48,68 @@ Vectors are generally used to story and modify the positions of objects and agen
 As can be guessed from the name, this class is meant to be used for 2D environments. For examples of uses for
 Vectors i would highly recommend Daniel Shiffman's Youtube videos and his book Nature of Code.
 
-youtube channel: https://www.youtube.com/channel/UCvjgXvBlbQiydffZU7m1_aw
-book: https://natureofcode.com/book/
+* youtube channel: https://www.youtube.com/channel/UCvjgXvBlbQiydffZU7m1_aw
+* book: https://natureofcode.com/book/
 
 This is a short and broad description of all methods. More in depth descriptions are commented in the code an will be
 shown by the suggestion algorithms of most IDEs:
 
 * Constructor
-** Creates a vector based on the given Parameters
+  * Creates a vector based on the given Parameters
 * SetAllComponents
-** Sets all values of the Vector to the specified Value
+  * Sets all values of the Vector to the specified Value
 * CreateFromAngle
-** Creates a vector pointing in the specified direction
+  * Creates a vector pointing in the specified direction
 * CreateRandomVector2D
-** Creates a unit vector with a random rotation
+  * Creates a unit vector with a random rotation
 * Add
-** Adds 2 Vectors together
+  * Adds 2 Vectors together
 * Sub
-** Subtracts one Vector from anther one
+  * Subtracts one Vector from anther one
 * Multiply
-** Multiplies two vectors
+  * Multiplies two vectors
 * Div
-** Divides one vector with another
+  * Divides one vector with another
 * Distance
-** Calculates the euclidean distance between two vectors
+  * Calculates the euclidean distance between two vectors
 * Normalize
-** Sets the magnitude of a vector to 1
+  * Sets the magnitude of a vector to 1
 * GetMag
-** Returns the magnitude of a vector
+  * Returns the magnitude of a vector
 * GetMagSquared
-** Returns the squared magnitude of a vector, which is faster to compute
+  * Returns the squared magnitude of a vector, which is faster to compute
 * getDirection
-** Returns the current rotation of the vector
+  * Returns the current rotation of the vector
 * Limit
-** Reduces the magnitude of a vector if it is greater than the specified number to the specified number
+  * Reduces the magnitude of a vector if it is greater than the specified number to the specified number
 * Lerp
-** Creates a vector at a specified point between two other vectors
+  * Creates a vector at a specified point between two other vectors
 * SetMag
-** Sets the Magnitude of the vector to a specified amount
+  * Sets the Magnitude of the vector to a specified amount
 * Midpoint
-** creates a vector in the middle of two other vectors
+  * creates a vector in the middle of two other vectors
 * DotProduct
-** Computes the dot product of two vectors
+  * Computes the dot product of two vectors
 * GetAbsoluteAngle
-** Computes the angle between two vectors
+  * Computes the angle between two vectors
 * Rotate
-** Rotates the vectors by a specified amount
+  * Rotates the vectors by a specified amount
 * ToPoint2D
-** Converts the Vector2D to a Point2D object
+  * Converts the Vector2D to a Point2D object
 * GetX
-** Returns the value of X
+  * Returns the value of X
 * SetX
-** Changes the value of X
+  * Changes the value of X
 * GetY
-** Returns the value of Y
+  * Returns the value of Y
 * SetY
-** Changes the value of Y
+  * Changes the value of Y
 * Equals
-** checks if two vectors point at the same point, also works with Point2D
+  * checks if two vectors point at the same point, also works with Point2D
 * Hashcode
-** Computes the hashcode of the vector
+  * Computes the hashcode of the vector
 * ToString
-** Converts the vector into a string
+  * Converts the vector into a string
 
 ### Physics2D
 This class is a Java port of the physics that Daniel Shiffman implements in his book Nature of Code.
@@ -137,38 +137,38 @@ This model results in very realistic movements and is a good approximation of th
 This is a short and broad description of all methods.
 
 * Constructor
-** Creates an agent based on the given Parameters
+  * Creates an agent based on the given Parameters
 * Seek
-** Commands the agent to seek a point
+  * Commands the agent to seek a point
 * Avoid
-** Commands the agent to avoid a point
+  * Commands the agent to avoid a point
 * Move
-** Commands the agent to either seek or avoid a point
+  * Commands the agent to either seek or avoid a point
 * UpdatePosition
-** Computes the new Position of an agent after all Commands have been issued
+  * Computes the new Position of an agent after all Commands have been issued
 * SetLocation
-** Moves The agent to a location
+  * Moves The agent to a location
 * GetLocation
-** Returns the current location
+  * Returns the current location
 * GetX
-** Returns the value of X
+  * Returns the value of X
 * SetX
-** Changes the value of X
+  * Changes the value of X
 * GetY
-** Returns the value of Y
+  * Returns the value of Y
 * SetY
-** Changes the value of Y
+  * Changes the value of Y
 * Distance
-** Computes the distance of an agent to a point
+  * Computes the distance of an agent to a point
 * GetVelocity
-** Returns the current velocity
+  * Returns the current velocity
 * GetAcceleration
-** Returns the current acceleration
+  * Returns the current acceleration
 * GetMaxSpeed
-** Returns the maximum speed with which an agent can travel
+  * Returns the maximum speed with which an agent can travel
 * SetMaxSpeed
-** Changes the maximum speed with which an agent can travel
+  * Changes the maximum speed with which an agent can travel
 * GetMaxForce
-** Returns the maximum force with which an agent can turn
+  * Returns the maximum force with which an agent can turn
 * SetMaxForce
-** Changes the maximum force with which an agent can turn
+  * Changes the maximum force with which an agent can turn
