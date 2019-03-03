@@ -1,4 +1,4 @@
-#physics Engine
+# Physics Engine
 
 ## Introduction
 This project is a simple physics engine with the goal of maximum accessibility.
