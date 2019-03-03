@@ -48,7 +48,7 @@ Vectors are generally used to story and modify the positions of objects and agen
 As can be guessed from the name, this class is meant to be used for 2D environments. For examples of uses for
 Vectors i would highly recommend Daniel Shiffman's Youtube videos and his book Nature of Code.
 
-youtube chanel: https://www.youtube.com/channel/UCvjgXvBlbQiydffZU7m1_aw
+youtube channel: https://www.youtube.com/channel/UCvjgXvBlbQiydffZU7m1_aw
 book: https://natureofcode.com/book/
 
 This is a short and broad description of all methods. More in depth descriptions are commented in the code an will be
