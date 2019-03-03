@@ -15,8 +15,8 @@ All classes and methods are created with the goal of maximum accessibility and u
 ## How to contribute
 If you want to contribute to this library by writing some code you can simply do that an open a pull request.
 If you encounter a bug, need help or have a suggestion how to improve the code, you can do so by opening an issue.
-If you don't know how to do that [here] (https://www.youtube.com/watch?v=WMykv2ZMyEQ) is an explanatory video about Github issues
-and [here] (https://www.youtube.com/watch?v=_NrSWLQsDL4) is one about pull requests.
+If you don't know how to do that https://www.youtube.com/watch?v=WMykv2ZMyEQ is an explanatory video about Github issues
+and https://www.youtube.com/watch?v=_NrSWLQsDL4 is one about pull requests.
 
 ### Rules to contribute
 *
@@ -24,5 +24,5 @@ and [here] (https://www.youtube.com/watch?v=_NrSWLQsDL4) is one about pull reque
 ## How to install the Library
 
 ## How to use the Library
-### Vector2D and Vector3D
+### Vector2D
 

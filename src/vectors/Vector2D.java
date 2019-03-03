@@ -72,7 +72,7 @@ public class Vector2D {
     /**
      * Creates a unit vector from the given angle
      *
-     * @param angle The angle in radians that the vector should be at
+     * @param angle The angle in radians that the vector will be at
      * @return The created vector
      */
     public static Vector2D createFromAngle(final double angle) {
@@ -82,7 +82,7 @@ public class Vector2D {
     /**
      * Creates a vector from the given angle with the given magnitude
      *
-     * @param angle The angle in radians that the vector should be at
+     * @param angle The angle in radians that the vector will be at
      * @param mag   The Magnitude of the vector that will be created
      * @return The created vector
      */
@@ -488,7 +488,7 @@ public class Vector2D {
     }
 
     /**
-     * Sets the length of this vector to the maximum,
+     * Sets the magnitude of this vector to the maximum,
      * if it happens to be longer
      *
      * @param max The maximum magnitude of the vector
@@ -500,25 +500,25 @@ public class Vector2D {
     }
 
     /**
-     * Sets the length of the given vector without changing it to the maximum and returns it as a new vector,
+     * Sets the magnitude of the given vector without changing it to the maximum and returns it as a new vector,
      * if it happens to be longer
      *
-     * @param vector2D The vector which length might be to long
+     * @param vector2D The vector which magnitude might be to long
      * @param max      The maximum magnitude of the vector
-     * @return The vector with the maximum length that yoi specified
+     * @return The vector with the maximum magnitude that you specified
      */
     public static Vector2D limit(final Vector2D vector2D, final double max) {
         return limit(vector2D.x, vector2D.y, max);
     }
 
     /**
-     * Sets the length of the given x and y component, which represent a vector,
+     * Sets the magnitude of the given x and y component, which represent a vector,
      * to the maximum and returns it as a new vector, if it happens to be longer
      *
      * @param x   The x component of the vector
      * @param y   The y component of the vector
      * @param max The maximum magnitude of the vector
-     * @return The vector with the maximum length that yoi specified
+     * @return The vector with the maximum magnitude that you specified
      */
     public static Vector2D limit(final double x, final double y, final double max) {
         final Vector2D vector2D = new Vector2D(x, y);
@@ -893,7 +893,7 @@ public class Vector2D {
     /**
      * Sets the x component of the Vector
      *
-     * @param x The x component the vector should be set to
+     * @param x The x component the vector will be set to
      */
     public void setX(final double x) {
         this.x = x;
@@ -911,7 +911,7 @@ public class Vector2D {
     /**
      * Sets the y component of the Vector
      *
-     * @param y The y component the vector should be set to
+     * @param y The y component the vector will be set to
      */
     public void setY(final double y) {
         this.y = y;
