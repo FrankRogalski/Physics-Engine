@@ -36,10 +36,14 @@ If you are having trouble following the rules don't hesitate contacting me via a
 
 ## How to install the Library
 If you are interested in the code just clone this repository (here is a link that shows you how to do that).
-otherwise you can just use this link to download the jar (link). How you can include the libraries into your project
+otherwise you can just use this link in the download section to download the jar. How you can include the libraries into your project
 is shown in the following videos
 * Eclipse: https://www.youtube.com/watch?v=3aYYrzl3xzk
 * IntelliJ: https://www.youtube.com/watch?v=QAJ09o3Xl_0
+
+### Download
+With the following link you can download the jar and just use it
+* https://www.dropbox.com/s/a8gnbnb93507djh/Physics.jar?dl=0
 
 ## How to use the Library
 ### Vector2D
