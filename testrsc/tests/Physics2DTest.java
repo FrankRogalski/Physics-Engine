@@ -248,12 +248,13 @@ public class Physics2DTest {
     @Test
     public void testUpdatePosition() {
         Physics2D physics2D = new Physics2D(0, 0, 5, 0.1);
+        physics2D.setFriction(0.5);
         physics2D.seek(10, 0);
         physics2D.updatePosition();
 
-        Assertions.assertEquals(0.1, physics2D.getX());
+        Assertions.assertEquals(0.05, physics2D.getX());
         Assertions.assertEquals(0, physics2D.getY());
-        Assertions.assertEquals(0.1, physics2D.getVelocity().getX());
+        Assertions.assertEquals(0.05, physics2D.getVelocity().getX());
         Assertions.assertEquals(0, physics2D.getVelocity().getY());
         Assertions.assertEquals(0, physics2D.getAcceleration().getX());
         Assertions.assertEquals(0, physics2D.getAcceleration().getY());
@@ -392,5 +393,21 @@ public class Physics2DTest {
         Physics2D physics2D = new Physics2D(0, 0, 0, 10);
 
         Assertions.assertEquals(10, physics2D.getMaxForce());
+    }
+
+    @Test
+    public void testSetFriction() {
+        Physics2D physics2D = new Physics2D(0, 0, 0, 0);
+        physics2D.setFriction(10);
+
+        Assertions.assertEquals(10, physics2D.getFriction());
+    }
+
+    @Test
+    public void testGetFriction() {
+        Physics2D physics2D = new Physics2D(0, 0, 0, 0);
+        physics2D.setFriction(10);
+
+        Assertions.assertEquals(10, physics2D.getFriction());
     }
 }

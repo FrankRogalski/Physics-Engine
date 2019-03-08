@@ -12,10 +12,12 @@ public class Physics2D {
 
     private double maxSpeed;
     private double maxForce;
+    private double friction = 0;
 
     /**
      * The constructor of the class
-     *
+     * The maximum speed is typically the amount of pixels a vehicle can cross per update and should be greater than 0
+     * The maximum force should be between 0(cant accelerate) and 1(instant acceleration)
      * @param x        The starting x position of the agent
      * @param y        The starting y position of the agent
      * @param maxSpeed The maximum speed the agent can achieve
@@ -29,7 +31,8 @@ public class Physics2D {
 
     /**
      * The constructor of the class
-     *
+     * The maximum speed is typically the amount of pixels a vehicle can cross per update and should be greater than 0
+     * The maximum force should be between 0(cant accelerate) and 1(instant acceleration)
      * @param location The starting location of the agent
      * @param maxSpeed The maximum speed the agent can achieve
      * @param maxForce The maximum force with which the agent can change its velocity
@@ -46,7 +49,8 @@ public class Physics2D {
 
     /**
      * The constructor of the class
-     *
+     * The maximum speed is typically the amount of pixels a vehicle can cross per update and should be greater than 0
+     * The maximum force should be between 0(cant accelerate) and 1(instant acceleration)
      * @param physics2D A Template Physics object from which the agent will copy the current location
      * @param maxSpeed  The maximum speed the agent can achieve
      * @param maxForce  The maximum force with which the agent can change its velocity
@@ -73,6 +77,7 @@ public class Physics2D {
             acceleration = new Vector2D(physics2D.acceleration);
             this.maxForce = physics2D.maxForce;
             this.maxSpeed = physics2D.maxSpeed;
+            this.friction = physics2D.friction;
         } else {
             throw new IllegalArgumentException("The physics Object cant be null");
         }
@@ -93,7 +98,7 @@ public class Physics2D {
      *
      * @param x      The x component of the Point that will be chased
      * @param y      The y component of the Point that will be chased
-     * @param weight The rating of the importance of the target
+     * @param weight The rating of the importance of the target (defaults to 1)
      */
     public void seek(final double x, final double y, final double weight) {
         move(new Vector2D(x, y), weight, false);
@@ -112,7 +117,7 @@ public class Physics2D {
      * Commands the agent to seek a specific point
      *
      * @param moveTo The point that will be chased
-     * @param weight The rating of the importance of the target
+     * @param weight The rating of the importance of the target (defaults to 1)
      */
     public void seek(final Vector2D moveTo, final double weight) {
         move(moveTo, weight, false);
@@ -131,7 +136,7 @@ public class Physics2D {
      * Commands the agent to seek a specific point
      *
      * @param moveTo The physics object of the agent which will be chased
-     * @param weight The rating of the importance of the target
+     * @param weight The rating of the importance of the target (defaults to 1)
      */
     public void seek(final Physics2D moveTo, final double weight) {
         move(moveTo.location, weight, false);
@@ -152,7 +157,7 @@ public class Physics2D {
      *
      * @param x      The x component of the Point that will be avoided
      * @param y      The y component of the Point that will be avoided
-     * @param weight The rating of the importance of the target
+     * @param weight The rating of the importance of the target (defaults to 1)
      */
     public void avoid(final double x, final double y, final double weight) {
         move(new Vector2D(x, y), weight, true);
@@ -171,7 +176,7 @@ public class Physics2D {
      * Commands the agent to flee from a specific point
      *
      * @param fleeFrom The point that will be avoided
-     * @param weight   The rating of the importance of the target
+     * @param weight   The rating of the importance of the target (defaults to 1)
      */
     public void avoid(final Vector2D fleeFrom, final double weight) {
         move(fleeFrom, weight, true);
@@ -190,7 +195,7 @@ public class Physics2D {
      * Commands the agent to flee from a specific point
      *
      * @param fleeFrom The physics object of the agent which will be avoided
-     * @param weight   The rating of the importance of the target
+     * @param weight   The rating of the importance of the target (defaults to 1)
      */
     public void avoid(final Physics2D fleeFrom, final double weight) {
         move(fleeFrom.location, weight, true);
@@ -201,7 +206,7 @@ public class Physics2D {
      *
      * @param x      The x component of the Point that will be chased
      * @param y      The y component of the Point that will be chased
-     * @param weight The rating of the importance of the target
+     * @param weight The rating of the importance of the target (defaults to 1)
      * @param avoid  Commands if the target will be chased or avoided
      */
     public void move(final double x, final double y, final double weight, final boolean avoid) {
@@ -226,7 +231,7 @@ public class Physics2D {
      * Commands the agent to seek a specific point
      *
      * @param moveTo The point that will be chased
-     * @param weight The rating of the importance of the target
+     * @param weight The rating of the importance of the target (defaults to 1)
      * @param avoid  Commands if the target will be chased or avoided
      */
     public void move(final Vector2D moveTo, final double weight, final boolean avoid) {
@@ -237,7 +242,7 @@ public class Physics2D {
      * Commands the agent to seek a specific point
      *
      * @param moveTo The physics object of the agent which will be chased
-     * @param weight The rating of the importance of the target
+     * @param weight The rating of the importance of the target (defaults to 1)
      * @param avoid  Commands if the target will be chased or avoided
      */
     public void move(final Physics2D moveTo, final double weight, final boolean avoid) {
@@ -250,12 +255,14 @@ public class Physics2D {
     public void updatePosition() {
         velocity.add(acceleration);
         velocity.limit(maxSpeed);
+        velocity.multiply(1 - friction);
         location.add(velocity);
         acceleration.setAllComponents(0);
     }
 
     /**
      * Sets the location of the agent
+     * The location is typically a pixel coordinate on your window and should therefore not exceed your window size
      *
      * @param x The x component of the new location
      * @param y The y component of the new location
@@ -266,6 +273,7 @@ public class Physics2D {
 
     /**
      * Sets the location of the agent
+     * The location is typically a pixel coordinate on your window and should therefore not exceed your window size
      *
      * @param vector2D The new location of the agent
      */
@@ -275,6 +283,7 @@ public class Physics2D {
 
     /**
      * Sets the location of the agent
+     * The location is typically a pixel coordinate on your window and should therefore not exceed your window size
      *
      * @param physics2D The agent to which this agent will move
      */
@@ -340,6 +349,7 @@ public class Physics2D {
 
     /**
      * Calculates the distance of the agent to another point
+     *
      * @param point The point to which the distance is calculated
      * @return The distance of the agent to another point
      */
@@ -349,6 +359,7 @@ public class Physics2D {
 
     /**
      * Calculates the distance of the agent to another agent
+     *
      * @param physics2D The physics of another agent to which the distance is calculated
      * @return The distance of the agent to another agent
      */
@@ -358,6 +369,7 @@ public class Physics2D {
 
     /**
      * Returns the velocity of the agent
+     *
      * @return The velocity of the agent
      */
     public Vector2D getVelocity() {
@@ -366,6 +378,7 @@ public class Physics2D {
 
     /**
      * Returns the acceleration of the agent
+     *
      * @return The acceleration of the agent
      */
     public Vector2D getAcceleration() {
@@ -374,6 +387,8 @@ public class Physics2D {
 
     /**
      * Sets the maximum speed that the agent can travel at
+     * The maximum speed is typically the amount of pixels a vehicle can cross per update and should be greater than 0
+     *
      * @param maxSpeed The new maximum speed that the agent can travel at
      */
     public void setMaxSpeed(final double maxSpeed) {
@@ -382,6 +397,7 @@ public class Physics2D {
 
     /**
      * Returns the maximum speed that the agent can travel at
+     *
      * @return The maximum speed that the agent can travel at
      */
     public double getMaxSpeed() {
@@ -390,6 +406,8 @@ public class Physics2D {
 
     /**
      * Sets the maximum force with which an agent can turn
+     * The maximum force should be between 0(cant accelerate) and 1(instant acceleration)
+     *
      * @param maxForce The new maximum force with which an agent can turn
      */
     public void setMaxForce(final double maxForce) {
@@ -398,9 +416,29 @@ public class Physics2D {
 
     /**
      * Returns the maximum force with which an agent can turn
+     *
      * @return The maximum force with which an agent can turn
      */
     public double getMaxForce() {
         return maxForce;
+    }
+
+    /**
+     * Sets the friction which intern is responsible for reducing the velocity of the agent at every step
+     * The friction should have a value between 0(no friction) and 1(immovable object)
+     *
+     * @param friction The new friction of the agent
+     */
+    public void setFriction(final double friction) {
+        this.friction = friction;
+    }
+
+    /**
+     * Returns the amount of friction that slows the agent down
+     *
+     * @return The amount of friction that slows the agent down
+     */
+    public double getFriction() {
+        return friction;
     }
 }
