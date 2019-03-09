@@ -254,7 +254,9 @@ public class Physics2D {
      */
     public void updatePosition() {
         acceleration.limit(maxForce);
-        acceleration.add(Vector2D.multiply(velocity, -friction));
+        if (friction != 0) {
+            acceleration.add(Vector2D.multiply(velocity, -friction));
+        }
         velocity.add(acceleration);
         velocity.limit(maxSpeed);
         location.add(velocity);
