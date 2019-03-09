@@ -253,9 +253,9 @@ public class Physics2D {
      * Updates the position of the agent after all targets have been taken into consideration
      */
     public void updatePosition() {
+        acceleration.add(Vector2D.multiply(velocity, -friction));
         velocity.add(acceleration);
         velocity.limit(maxSpeed);
-        velocity.multiply(1 - friction);
         location.add(velocity);
         acceleration.setAllComponents(0);
     }

@@ -249,12 +249,14 @@ public class Physics2DTest {
     public void testUpdatePosition() {
         Physics2D physics2D = new Physics2D(0, 0, 5, 0.1);
         physics2D.setFriction(0.5);
-        physics2D.seek(10, 0);
-        physics2D.updatePosition();
+        for (int i = 0; i < 2; i++) {
+            physics2D.seek(10, 0);
+            physics2D.updatePosition();
+        }
 
-        Assertions.assertEquals(0.05, physics2D.getX());
+        Assertions.assertEquals(0.25, physics2D.getX());
         Assertions.assertEquals(0, physics2D.getY());
-        Assertions.assertEquals(0.05, physics2D.getVelocity().getX());
+        Assertions.assertEquals(0.15, Math.round(physics2D.getVelocity().getX() * 100000) / 100000d);
         Assertions.assertEquals(0, physics2D.getVelocity().getY());
         Assertions.assertEquals(0, physics2D.getAcceleration().getX());
         Assertions.assertEquals(0, physics2D.getAcceleration().getY());
