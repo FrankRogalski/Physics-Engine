@@ -406,7 +406,7 @@ public class Physics2D {
 
     /**
      * Sets the maximum force with which an agent can turn
-     * The maximum force should be between 0(cant accelerate) and 1(instant acceleration)
+     * The maximum force should be between 0(can't accelerate) and 1(instant acceleration)
      *
      * @param maxForce The new maximum force with which an agent can turn
      */

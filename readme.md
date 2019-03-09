@@ -125,17 +125,28 @@ in depth understanding of the topic.
 Here is also a rough overview of how to work with physics objects.
 A physics object (from here on called agent) stores 5 essential values
 * Location
+  * The location is typically a pixel coordinate on your window and should therefore not exceed your window size
 * Velocity
+  * The velocity is the current speed of the agent and will never exceed the maximum speed
 * Acceleration
+  * The acceleration is the force that either speeds the agent up, slows it down or changes its direction.
+  It will never be greater than the maximum force
 * Maximum Speed
+  * The maximum speed is typically the amount of pixels a vehicle can cross per update and should be greater than 0
 * Maximum Force
+  * The maximum force is the amount force an agent can use to change its velocity.
+  It should be between 0(can't accelerate) and the maximum speed(instant acceleration)
+* Friction
+  * The friction is the constant amount of deceleration an agent receives while moving.
+  It should have a value between 0(no friction) and 1(immovable object)
 
 These values govern how the agent moves. The agent also has two basic interactions:
 It can chase something and it can flee from something. Whenever you command the agent to perform
 one of these actions it calculates how it will change its velocity to best obey your command.
 you can repeat these command any number of times before commanding the agent to actually execute the commands.
 the resulting acceleration will be the average of all of your commands. This acceleration is than added to the velocity
-and the velocity is added to the location. In the end the acceleration will be reset so that the next commands can be issued.
+and the velocity is added to the location. Afterwards friction is applied to the velocity.
+In the end the acceleration will be reset so that the next commands can be issued.
 This model results in very realistic movements and is a good approximation of the real world.
 
 This is a short and broad description of all methods.
@@ -152,6 +163,7 @@ This is a short and broad description of all methods.
   * Computes the new Position of an agent after all Commands have been issued
 * SetLocation
   * Moves The agent to a location
+  * The location is typically a pixel coordinate on your window and should therefore not exceed your window size
 * GetLocation
   * Returns the current location
 * GetX
@@ -172,7 +184,14 @@ This is a short and broad description of all methods.
   * Returns the maximum speed with which an agent can travel
 * SetMaxSpeed
   * Changes the maximum speed with which an agent can travel
+  * The maximum speed is typically the amount of pixels a vehicle can cross per update and should be greater than 0
 * GetMaxForce
   * Returns the maximum force with which an agent can turn
 * SetMaxForce
   * Changes the maximum force with which an agent can turn
+  * The maximum force should be between 0(can't accelerate) and 1(instant acceleration)
+* GetFriction
+  * Returns the amount of friction that slows the agent down
+* SetFriction
+  * Sets the friction which intern is responsible for reducing the velocity of the agent at every step
+  * The friction should have a value between 0(no friction) and 1(immovable object)
