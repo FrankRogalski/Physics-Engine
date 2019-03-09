@@ -253,6 +253,7 @@ public class Physics2D {
      * Updates the position of the agent after all targets have been taken into consideration
      */
     public void updatePosition() {
+        acceleration.limit(maxForce);
         acceleration.add(Vector2D.multiply(velocity, -friction));
         velocity.add(acceleration);
         velocity.limit(maxSpeed);
