@@ -189,7 +189,7 @@ This is a short and broad description of all methods.
   * Returns the maximum force with which an agent can turn
 * SetMaxForce
   * Changes the maximum force with which an agent can turn
-  * The maximum force should be between 0(can't accelerate) and 1(instant acceleration)
+  * The maximum force should be between 0(can't accelerate) and maximum speed(instant acceleration)
 * GetFriction
   * Returns the amount of friction that slows the agent down
 * SetFriction
