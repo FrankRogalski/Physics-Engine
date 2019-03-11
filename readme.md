@@ -3,7 +3,7 @@
 ## Introduction
 This project is a simple physics engine with the goal of maximum accessibility.
 This library is largely inspired by Daniel Shiffman's (♥) physics engine tutorial
-and my frustration with the JavFx Point2D class.
+and my frustration with the JavaFx Point2D class.
 
 ## Why it was created
 The main reason for the creation of this project was my frustration with the Point2D class provided by JavaFx 8
