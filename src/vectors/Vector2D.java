@@ -7,6 +7,7 @@ import java.util.Random;
 /**
  * A class that represents a vector on a 2D plain
  */
+@SuppressWarnings("WeakerAccess")
 public class Vector2D {
     private double x;
     private double y;
@@ -809,7 +810,7 @@ public class Vector2D {
             return 0;
         }
         if (delta < -1) {
-            return 180;
+            return Math.PI;
         }
         return Math.acos(delta);
     }

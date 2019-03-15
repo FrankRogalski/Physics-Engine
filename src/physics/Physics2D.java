@@ -5,6 +5,7 @@ import vectors.Vector2D;
 /**
  * A class used to calculate the physics of an Agent in a 2D Environment
  */
+@SuppressWarnings("WeakerAccess")
 public class Physics2D {
     private Vector2D location;
     private Vector2D velocity = new Vector2D();
