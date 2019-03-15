@@ -3,7 +3,7 @@
 ## Introduction
 This project is a simple physics engine with the goal of maximum accessibility.
 This library is largely inspired by Daniel Shiffman's (♥) physics engine tutorial
-and my frustration with the JavFx Point2D class.
+and my frustration with the JavaFx Point2D class.
 
 ## Why it was created
 The main reason for the creation of this project was my frustration with the Point2D class provided by JavaFx 8
@@ -189,7 +189,7 @@ This is a short and broad description of all methods.
   * Returns the maximum force with which an agent can turn
 * SetMaxForce
   * Changes the maximum force with which an agent can turn
-  * The maximum force should be between 0(can't accelerate) and 1(instant acceleration)
+  * The maximum force should be between 0(can't accelerate) and maximum speed(instant acceleration)
 * GetFriction
   * Returns the amount of friction that slows the agent down
 * SetFriction
