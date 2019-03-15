@@ -322,6 +322,14 @@ public class Vector2DTest {
     }
 
     @Test
+    public void testNormalizeZero() {
+        final Vector2D vector2D = new Vector2D(0, 0);
+        vector2D.normalize();
+        // Test only if the method is accurate to 5 decimal places
+        assertEquals(0, vector2D.getMag(), 0.00001);
+    }
+
+    @Test
     public void testNormalizeSmallValues() {
         final Vector2D vector2D = new Vector2D(0.5, 0.5);
         vector2D.normalize();
@@ -778,6 +786,7 @@ public class Vector2DTest {
         assertEquals(vector2D1, vector2D2);
         assertEquals(vector2D1, point2D);
         assertNotEquals(vector2D1, vector2D3);
+        assertNotEquals(vector2D1, new StringBuilder());
     }
 
     @Test

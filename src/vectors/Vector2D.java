@@ -806,12 +806,6 @@ public class Vector2D {
      */
     public static double getAbsoluteAngle(final double x1, final double y1, final double x2, final double y2) {
         final double delta = (x1 * x2 + y1 * y2) / Math.sqrt((x1 * x1 + y1 * y1) * (x2 * x2 + y2 * y2));
-        if (delta > 1) {
-            return 0;
-        }
-        if (delta < -1) {
-            return Math.PI;
-        }
         return Math.acos(delta);
     }
 
