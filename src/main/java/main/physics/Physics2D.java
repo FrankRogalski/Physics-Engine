@@ -214,7 +214,7 @@ public class Physics2D {
         final Vector2D moveTo = new Vector2D(x, y);
         //desired
         moveTo.sub(location);
-        moveTo.setMag(maxSpeed);
+        moveTo.limit(maxSpeed);
         //steer
         moveTo.sub(velocity);
         moveTo.limit(maxForce);

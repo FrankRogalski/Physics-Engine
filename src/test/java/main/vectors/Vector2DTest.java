@@ -89,8 +89,8 @@ public class Vector2DTest {
             }
             directions.add(direction);
         }
-        assertEquals(Math.PI * -1.5, directions.stream().mapToDouble(Double::doubleValue).min().orElse(1), 0.1);
-        assertEquals(Math.PI * 0.5, directions.stream().mapToDouble(Double::doubleValue).max().orElse(1), 0.1);
+        assertEquals(-Math.PI, directions.stream().mapToDouble(Double::doubleValue).min().orElse(1), 0.1);
+        assertEquals(Math.PI, directions.stream().mapToDouble(Double::doubleValue).max().orElse(1), 0.1);
     }
 
     @Test
@@ -410,7 +410,13 @@ public class Vector2DTest {
 
     @Test
     public void testGetDirection() {
-        assertEquals(0, new Vector2D(1, 0).getDirection(), 0.00001);
+        assertEquals(0, new Vector2D(10, 0).getDirection(), 0.00001);
+        assertEquals(Math.PI, new Vector2D(-10, 0).getDirection(), 0.00001);
+        assertEquals(Math.PI * 0.75, new Vector2D(-10, 10).getDirection(), 0.00001);
+        assertEquals(-Math.PI * 0.75, new Vector2D(-10, -10).getDirection(), 0.00001);
+        assertEquals(-Math.PI / 2, new Vector2D(0, -10).getDirection(), 0.00001);
+        assertEquals(Math.PI / 2, new Vector2D(0, 10).getDirection(), 0.00001);
+        assertEquals(0, new Vector2D(0, 0).getDirection(), 0.00001);
     }
 
     @Test
@@ -479,19 +485,35 @@ public class Vector2DTest {
     }
 
     @Test
-    public void testLerp() {
-        final Vector2D vector2D1 = new Vector2D();
+    public void testLerpX() {
+        final Vector2D vector2D1 = new Vector2D(5, 0);
         final Vector2D vector2D2 = new Vector2D(10, 0);
         final Vector2D vector2D3 = vector2D1.lerp(vector2D2, 0.2);
 
-        assertEquals(2, vector2D3.getX(), 0.00001);
+        assertEquals(6, vector2D3.getX(), 0.00001);
         assertEquals(0, vector2D3.getY(), 0.00001);
 
-        assertEquals(0, vector2D1.getX(), 0.00001);
+        assertEquals(5, vector2D1.getX(), 0.00001);
         assertEquals(0, vector2D1.getY(), 0.00001);
 
         assertEquals(10, vector2D2.getX(), 0.00001);
         assertEquals(0, vector2D2.getY(), 0.00001);
+    }
+
+    @Test
+    public void testLerpY() {
+        final Vector2D vector2D1 = new Vector2D(0, 5);
+        final Vector2D vector2D2 = new Vector2D(0, 10);
+        final Vector2D vector2D3 = vector2D1.lerp(vector2D2, 0.2);
+
+        assertEquals(0, vector2D3.getX(), 0.00001);
+        assertEquals(6, vector2D3.getY(), 0.00001);
+
+        assertEquals(0, vector2D1.getX(), 0.00001);
+        assertEquals(5, vector2D1.getY(), 0.00001);
+
+        assertEquals(0, vector2D2.getX(), 0.00001);
+        assertEquals(10, vector2D2.getY(), 0.00001);
     }
 
     @Test
@@ -578,7 +600,17 @@ public class Vector2DTest {
     }
 
     @Test
-    public void testMidpoint() {
+    public void testMidpointX() {
+        final Vector2D vector2D1 = new Vector2D();
+        final Vector2D vector2D2 = new Vector2D(10, 0);
+        final Vector2D vector2D3 = vector2D1.midpoint(vector2D2);
+
+        assertEquals(5, vector2D3.getX(), 0.00001);
+        assertEquals(0, vector2D3.getY(), 0.00001);
+    }
+
+    @Test
+    public void testMidpointY() {
         final Vector2D vector2D1 = new Vector2D();
         final Vector2D vector2D2 = new Vector2D(0, 10);
         final Vector2D vector2D3 = vector2D1.midpoint(vector2D2);
@@ -660,10 +692,10 @@ public class Vector2DTest {
 
     @Test
     public void testGetAbsoluteAngle() {
-        final Vector2D vector2D1 = new Vector2D(-1, 0);
-        final Vector2D vector2D2 = new Vector2D(1, 0);
-
-        assertEquals(Math.PI, vector2D1.getAbsoluteAngle(vector2D2), 0.00001);
+        assertEquals(Math.PI / 2, new Vector2D(-42, 69).getAbsoluteAngle(new Vector2D(69, 42)), 0.00001);
+        assertEquals(Math.PI / 4, new Vector2D(1, 1).getAbsoluteAngle(new Vector2D(0, 1)), 0.00001);
+        assertEquals(2, new Vector2D(5 * Math.cos(2), 5 * Math.sin(2)).getAbsoluteAngle(new Vector2D(1, 0)), 0.00001);
+        assertEquals(1.3, new Vector2D(5 * Math.cos(1.3), -5 * Math.sin(1.3)).getAbsoluteAngle(new Vector2D(9, 0)), 0.00001);
     }
 
     @Test
@@ -695,11 +727,11 @@ public class Vector2DTest {
 
     @Test
     public void testRotate() {
-        final Vector2D vector2D = new Vector2D(1, 0);
+        final Vector2D vector2D = new Vector2D(10, 10);
         vector2D.rotate(Math.PI / 2);
 
-        assertEquals(0, vector2D.getX(), 0.00001);
-        assertEquals(1, vector2D.getY(), 0.00001);
+        assertEquals(-10, vector2D.getX(), 0.00001);
+        assertEquals(10, vector2D.getY(), 0.00001);
     }
 
     @Test
@@ -792,10 +824,11 @@ public class Vector2DTest {
 
     @Test
     public void testHashcode() {
-        final Vector2D vector2D1 = new Vector2D(12, 10);
-        final Vector2D vector2D2 = new Vector2D(12, 10);
-        final Vector2D vector2D3 = new Vector2D(10, 10);
+        final Vector2D vector2D1 = new Vector2D(42, 1337);
+        final Vector2D vector2D2 = new Vector2D(42, 1337);
+        final Vector2D vector2D3 = new Vector2D(69, 1337);
 
+        assertEquals(149945927, vector2D1.hashCode());
         assertEquals(vector2D1.hashCode(), vector2D2.hashCode());
         assertNotEquals(vector2D1.hashCode(), vector2D3.hashCode());
     }

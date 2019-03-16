@@ -486,7 +486,18 @@ public class Vector2D {
      * @return The rotation of the vector represented by the given x and y component
      */
     public static double getDirection(final double x, final double y) {
-        return Math.atan2(x, y) - HALF_PI;
+        if (x > 0) {
+            return Math.atan(y / x);
+        } else if (x < 0 && y >= 0) {
+            return Math.atan(y / x) + Math.PI;
+        } else if (x < 0) {
+            return Math.atan(y / x) - Math.PI;
+        } else if (x == 0 && y > 0) {
+            return HALF_PI;
+        } else if (x == 0 && y < 0) {
+            return -HALF_PI;
+        }
+        return 0;
     }
 
     /**
