@@ -1,9 +1,10 @@
-package physics;
+package main.physics;
 
 import org.junit.Test;
-import vectors.Vector2D;
+import main.vectors.Vector2D;
 
 import static org.junit.Assert.assertEquals;
+
 
 public class Physics2DTest {
     @Test

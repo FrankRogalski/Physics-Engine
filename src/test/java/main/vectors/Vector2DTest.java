@@ -1,4 +1,4 @@
-package vectors;
+package main.vectors;
 
 import javafx.geometry.Point2D;
 import org.junit.Test;
@@ -20,7 +20,6 @@ public class Vector2DTest {
     @Test
     public void testPresetConstructor() {
         final Vector2D vector2D = new Vector2D(10, 20);
-
         assertEquals(10, vector2D.getX(), 0.00001);
         assertEquals(20, vector2D.getY(), 0.00001);
     }

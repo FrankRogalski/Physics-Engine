@@ -1,8 +1,8 @@
 # Physics Engine
 
 ## Introduction
-This project is a simple physics engine with the goal of maximum accessibility.
-This library is largely inspired by Daniel Shiffman's (♥) physics engine tutorial
+This project is a simple main.physics engine with the goal of maximum accessibility.
+This library is largely inspired by Daniel Shiffman's (♥) main.physics engine tutorial
 and my frustration with the JavaFx Point2D class.
 
 ## Why it was created
@@ -11,8 +11,8 @@ It seems unnecessarily complicated to me, since Vectors aren't changeable once t
 and many useful operations, like limiting the length of a vector, are missing.
 
 ## Goals
-This library tries to improve on the problems with the standard JavaFx implementation by providing changeable vectors
-and a basic physics engine to help getting started with the programming of physics simulations and animations.
+This library tries to improve on the problems with the standard JavaFx implementation by providing changeable main.vectors
+and a basic main.physics engine to help getting started with the programming of main.physics simulations and animations.
 All classes and methods are created with the goal of maximum accessibility and utility.
 
 ## How to contribute
@@ -71,11 +71,11 @@ shown by the suggestion algorithms of most IDEs:
 * Sub
   * Subtracts one Vector from anther one
 * Multiply
-  * Multiplies two vectors
+  * Multiplies two main.vectors
 * Div
   * Divides one vector with another
 * Distance
-  * Calculates the euclidean distance between two vectors
+  * Calculates the euclidean distance between two main.vectors
 * Normalize
   * Sets the magnitude of a vector to 1
 * GetMag
@@ -87,17 +87,17 @@ shown by the suggestion algorithms of most IDEs:
 * Limit
   * Reduces the magnitude of a vector if it is greater than the specified number to the specified number
 * Lerp
-  * Creates a vector at a specified point between two other vectors
+  * Creates a vector at a specified point between two other main.vectors
 * SetMag
   * Sets the Magnitude of the vector to a specified amount
 * Midpoint
-  * creates a vector in the middle of two other vectors
+  * creates a vector in the middle of two other main.vectors
 * DotProduct
-  * Computes the dot product of two vectors
+  * Computes the dot product of two main.vectors
 * GetAbsoluteAngle
-  * Computes the angle between two vectors
+  * Computes the angle between two main.vectors
 * Rotate
-  * Rotates the vectors by a specified amount
+  * Rotates the main.vectors by a specified amount
 * ToPoint2D
   * Converts the Vector2D to a Point2D object
 * GetX
@@ -109,21 +109,21 @@ shown by the suggestion algorithms of most IDEs:
 * SetY
   * Changes the value of Y
 * Equals
-  * checks if two vectors point at the same point, also works with Point2D
+  * checks if two main.vectors point at the same point, also works with Point2D
 * Hashcode
   * Computes the hashcode of the vector
 * ToString
   * Converts the vector into a string
 
 ### Physics2D
-This class is a Java port of the physics that Daniel Shiffman implements in his book Nature of Code.
+This class is a Java port of the main.physics that Daniel Shiffman implements in his book Nature of Code.
 I therefore highly recommend watching his tutorial series about autonomous agents if you want an
 in depth understanding of the topic.
 
 * tutorial series: https://www.youtube.com/playlist?list=PLRqwX-V7Uu6YHt0dtyf4uiw8tKOxQLvlW
 
-Here is also a rough overview of how to work with physics objects.
-A physics object (from here on called agent) stores 5 essential values
+Here is also a rough overview of how to work with main.physics objects.
+A main.physics object (from here on called agent) stores 5 essential values
 * Location
   * The location is typically a pixel coordinate on your window and should therefore not exceed your window size
 * Velocity
