@@ -79,7 +79,7 @@ public class Vector2DTest {
     @Test
     public void testCreateRandomVector2D() {
         final List<Double> directions = new LinkedList<>();
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < 1000; i++) {
             final Vector2D vector2D = Vector2D.createRandomVector2D();
             // Test only if the method is accurate to 5 decimal places
             assertEquals(1, vector2D.getMag(), 0.00001);
@@ -89,6 +89,8 @@ public class Vector2DTest {
             }
             directions.add(direction);
         }
+        assertEquals(Math.PI * -1.5, directions.stream().mapToDouble(Double::doubleValue).min().orElse(1), 0.1);
+        assertEquals(Math.PI * 0.5, directions.stream().mapToDouble(Double::doubleValue).max().orElse(1), 0.1);
     }
 
     @Test
@@ -279,8 +281,8 @@ public class Vector2DTest {
 
     @Test
     public void testDistanceWithVector() {
-        final Vector2D vector2D1 = new Vector2D(0, 10);
-        final Vector2D vector2D2 = new Vector2D(0, -10);
+        final Vector2D vector2D1 = new Vector2D(10, 10);
+        final Vector2D vector2D2 = new Vector2D(10, -10);
 
         assertEquals(20, vector2D1.distance(vector2D2), 0.00001);
     }
