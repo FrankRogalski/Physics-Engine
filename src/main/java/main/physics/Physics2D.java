@@ -3,7 +3,7 @@ package main.physics;
 import main.vectors.Vector2D;
 
 /**
- * A class used to calculate the main.physics of an Agent in a 2D Environment
+ * A class used to calculate the physics of an Agent in a 2D Environment
  */
 @SuppressWarnings("WeakerAccess")
 public class Physics2D {
@@ -69,7 +69,7 @@ public class Physics2D {
     /**
      * Copy constructor to replicate the state of an agent perfectly
      *
-     * @param physics2D The main.physics object that will be cloned
+     * @param physics2D The physics object that will be cloned
      */
     public Physics2D(final Physics2D physics2D) {
         if (physics2D != null) {
@@ -80,7 +80,7 @@ public class Physics2D {
             this.maxSpeed = physics2D.maxSpeed;
             this.friction = physics2D.friction;
         } else {
-            throw new IllegalArgumentException("The main.physics Object cant be null");
+            throw new IllegalArgumentException("The physics Object cant be null");
         }
     }
 
@@ -127,7 +127,7 @@ public class Physics2D {
     /**
      * Commands the agent to seek a specific point
      *
-     * @param moveTo The main.physics object of the agent which will be chased
+     * @param moveTo The physics object of the agent which will be chased
      */
     public void seek(final Physics2D moveTo) {
         move(moveTo.location, 1, false);
@@ -136,7 +136,7 @@ public class Physics2D {
     /**
      * Commands the agent to seek a specific point
      *
-     * @param moveTo The main.physics object of the agent which will be chased
+     * @param moveTo The physics object of the agent which will be chased
      * @param weight The rating of the importance of the target (defaults to 1)
      */
     public void seek(final Physics2D moveTo, final double weight) {
@@ -186,7 +186,7 @@ public class Physics2D {
     /**
      * Commands the agent to flee from a specific point
      *
-     * @param fleeFrom The main.physics object of the agent which will be avoided
+     * @param fleeFrom The physics object of the agent which will be avoided
      */
     public void avoid(final Physics2D fleeFrom) {
         move(fleeFrom.location, 1, true);
@@ -195,7 +195,7 @@ public class Physics2D {
     /**
      * Commands the agent to flee from a specific point
      *
-     * @param fleeFrom The main.physics object of the agent which will be avoided
+     * @param fleeFrom The physics object of the agent which will be avoided
      * @param weight   The rating of the importance of the target (defaults to 1)
      */
     public void avoid(final Physics2D fleeFrom, final double weight) {
@@ -242,7 +242,7 @@ public class Physics2D {
     /**
      * Commands the agent to seek a specific point
      *
-     * @param moveTo The main.physics object of the agent which will be chased
+     * @param moveTo The physics object of the agent which will be chased
      * @param weight The rating of the importance of the target (defaults to 1)
      * @param avoid  Commands if the target will be chased or avoided
      */
@@ -364,7 +364,7 @@ public class Physics2D {
     /**
      * Calculates the distance of the agent to another agent
      *
-     * @param physics2D The main.physics of another agent to which the distance is calculated
+     * @param physics2D The physics of another agent to which the distance is calculated
      * @return The distance of the agent to another agent
      */
     public double distance(final Physics2D physics2D) {

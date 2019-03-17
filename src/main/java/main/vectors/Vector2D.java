@@ -123,7 +123,7 @@ public class Vector2D {
 
     /**
      * Adds the second vector to the first and returns the result as a new vector
-     * without changing either of the given main.vectors
+     * without changing either of the given vectors
      *
      * @param vector2D1 The fist vector that will be added
      * @param vector2D2 The second vector that will be added
@@ -183,7 +183,7 @@ public class Vector2D {
 
     /**
      * Subtracts the second vector from the first and returns the result as a new vector
-     * without changing either of the given main.vectors
+     * without changing either of the given vectors
      *
      * @param vector2D1 The fist vector that will be subtracted
      * @param vector2D2 The second vector that will be subtracted
@@ -310,7 +310,7 @@ public class Vector2D {
      * Calculates the distance between this vector to the given vector
      *
      * @param vector2D the vector to which the distance will be calculated
-     * @return The distance between the main.vectors
+     * @return The distance between the vectors
      */
     public double distance(final Vector2D vector2D) {
         return distance(vector2D.x, vector2D.y);
@@ -328,11 +328,11 @@ public class Vector2D {
     }
 
     /**
-     * Calculates the distance between the given main.vectors
+     * Calculates the distance between the given vectors
      *
      * @param vector2D1 The vector from which the distance will be calculated
      * @param vector2D2 The vector to which the distance is calculated
-     * @return The distance between the main.vectors
+     * @return The distance between the vectors
      */
     public static double distance(final Vector2D vector2D1, final Vector2D vector2D2) {
         return vector2D1.distance(vector2D2);
@@ -563,7 +563,7 @@ public class Vector2D {
     }
 
     /**
-     * Linearly interpolates between the given main.vectors
+     * Linearly interpolates between the given vectors
      *
      * @param vector2D1  The vector from which will be lerped
      * @param vector2D2  The vector to which will be lerped
@@ -652,8 +652,8 @@ public class Vector2D {
     /**
      * Returns the vector in the middle of this one and the given one
      *
-     * @param vector2D One of the main.vectors between which the midpoint is located
-     * @return The midpoint between the two main.vectors
+     * @param vector2D One of the vectors between which the midpoint is located
+     * @return The midpoint between the two vectors
      */
     public Vector2D midpoint(final Vector2D vector2D) {
         return midpoint(vector2D.x, vector2D.y);
@@ -664,18 +664,18 @@ public class Vector2D {
      *
      * @param x The x component of the vector
      * @param y The y component of the Vector
-     * @return The midpoint between the two main.vectors
+     * @return The midpoint between the two vectors
      */
     public Vector2D midpoint(final double x, final double y) {
         return Vector2D.midpoint(this.x, this.y, x, y);
     }
 
     /**
-     * Returns the midpoint of the two given main.vectors
+     * Returns the midpoint of the two given vectors
      *
-     * @param vector2D1 One of the main.vectors between which the midpoint is located
-     * @param vector2D2 One of the main.vectors between which the midpoint is located
-     * @return The midpoint of the two given main.vectors
+     * @param vector2D1 One of the vectors between which the midpoint is located
+     * @param vector2D2 One of the vectors between which the midpoint is located
+     * @return The midpoint of the two given vectors
      */
     public static Vector2D midpoint(final Vector2D vector2D1, final Vector2D vector2D2) {
         return vector2D1.midpoint(vector2D2);
@@ -684,7 +684,7 @@ public class Vector2D {
     /**
      * Returns the midpoint between the given vector and the x and y components which represent a vector
      *
-     * @param vector2D One of the main.vectors between which the midpoint is located
+     * @param vector2D One of the vectors between which the midpoint is located
      * @param x        The x component of the other vector
      * @param y        The x component of the other vector
      * @return The midpoint between the given vector and the x and y components which represent a vector
@@ -694,13 +694,13 @@ public class Vector2D {
     }
 
     /**
-     * Returns the midpoint between the x and y components which are representing main.vectors
+     * Returns the midpoint between the x and y components which are representing vectors
      *
      * @param x1 The x component representing the first vector
      * @param y1 The y component representing the first vector
      * @param x2 The x component representing the second vector
      * @param y2 The y component representing the second vector
-     * @return The midpoint between the x and y components which are representing main.vectors
+     * @return The midpoint between the x and y components which are representing vectors
      */
     public static Vector2D midpoint(final double x1, final double y1, final double x2, final double y2) {
         return new Vector2D((x1 + x2) / 2, (y1 + y2) / 2);
@@ -710,7 +710,7 @@ public class Vector2D {
      * Calculates the dot product of this vector and another one
      *
      * @param vector2D The vector with which the dot product is calculated
-     * @return The dot Product of the two main.vectors
+     * @return The dot Product of the two vectors
      */
     public double dotProduct(final Vector2D vector2D) {
         return dotProduct(vector2D.x, vector2D.y);
@@ -721,18 +721,18 @@ public class Vector2D {
      *
      * @param x The x component of the second vector
      * @param y The y component of the second vector
-     * @return The dot Product of the two main.vectors
+     * @return The dot Product of the two vectors
      */
     public double dotProduct(final double x, final double y) {
         return Vector2D.dotProduct(this.x, this.y, x, y);
     }
 
     /**
-     * Calculates the dot product of the given main.vectors
+     * Calculates the dot product of the given vectors
      *
      * @param vector2D1 The first vector
      * @param vector2D2 The second vector
-     * @return The dot Product of the two main.vectors
+     * @return The dot Product of the two vectors
      */
     public static double dotProduct(final Vector2D vector2D1, final Vector2D vector2D2) {
         return vector2D1.dotProduct(vector2D2);
@@ -744,7 +744,7 @@ public class Vector2D {
      * @param vector2D The first vector
      * @param x        The x component of the second vector
      * @param y        The y component of the second vector
-     * @return The dot Product of the two main.vectors
+     * @return The dot Product of the two vectors
      */
     public static double dotProduct(final Vector2D vector2D, final double x, final double y) {
         return vector2D.dotProduct(x, y);
@@ -757,7 +757,7 @@ public class Vector2D {
      * @param y1 The y component of the first vector
      * @param x2 The x component of the second vector
      * @param y2 The y component of the second vector
-     * @return The dot Product of the two main.vectors
+     * @return The dot Product of the two vectors
      */
     public static double dotProduct(final double x1, final double y1, final double x2, final double y2) {
         return x1 * x2 + y1 * y2;
@@ -785,7 +785,7 @@ public class Vector2D {
     }
 
     /**
-     * Returns the absolute angle between the given main.vectors
+     * Returns the absolute angle between the given vectors
      *
      * @param vector2D1 The vector from which the angle is calculated
      * @param vector2D2 The vector to which the angle is calculated
