@@ -7,6 +7,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.*;
 
 public class Vector2DTest {
     @Test
@@ -63,7 +64,7 @@ public class Vector2DTest {
     @Test
     public void testCreateFromAngle() {
         final Vector2D vector2D = Vector2D.createFromAngle(Math.PI / 2);
-        // Test only if the method is accurate to 5 decimal places
+        
         assertEquals(0, vector2D.getX(), 0.00001);
         assertEquals(1, vector2D.getY(), 0.00001);
     }
@@ -71,7 +72,7 @@ public class Vector2DTest {
     @Test
     public void testCreateFromAngleWithDistance() {
         final Vector2D vector2D = Vector2D.createFromAngle(Math.PI / 2, 5);
-        // Test only if the method is accurate to 5 decimal places
+        
         assertEquals(0, vector2D.getX(), 0.00001);
         assertEquals(5, vector2D.getY(), 0.00001);
     }
@@ -81,7 +82,7 @@ public class Vector2DTest {
         final List<Double> directions = new LinkedList<>();
         for (int i = 0; i < 1000; i++) {
             final Vector2D vector2D = Vector2D.createRandomVector2D();
-            // Test only if the method is accurate to 5 decimal places
+            
             assertEquals(1, vector2D.getMag(), 0.00001);
             final double direction = vector2D.getDirection();
             if (directions.contains(direction)) {
@@ -318,7 +319,7 @@ public class Vector2DTest {
     public void testNormalize() {
         final Vector2D vector2D = new Vector2D(5, 3);
         vector2D.normalize();
-        // Test only if the method is accurate to 5 decimal places
+
         assertEquals(1, vector2D.getMag(), 0.00001);
     }
 
@@ -326,7 +327,7 @@ public class Vector2DTest {
     public void testNormalizeZero() {
         final Vector2D vector2D = new Vector2D(0, 0);
         vector2D.normalize();
-        // Test only if the method is accurate to 5 decimal places
+
         assertEquals(0, vector2D.getMag(), 0.00001);
     }
 
@@ -334,7 +335,7 @@ public class Vector2DTest {
     public void testNormalizeSmallValues() {
         final Vector2D vector2D = new Vector2D(0.5, 0.5);
         vector2D.normalize();
-        // Test only if the method is accurate to 5 decimal places
+
         assertEquals(1, vector2D.getMag(), 0.00001);
     }
 
@@ -342,7 +343,7 @@ public class Vector2DTest {
     public void testStaticNormalize() {
         final Vector2D vector2D1 = new Vector2D(5, 3);
         final Vector2D vector2D2 = Vector2D.normalize(vector2D1);
-        // Test only if the method is accurate to 5 decimal places
+        
         assertEquals(1, vector2D2.getMag(), 0.00001);
 
         assertEquals(5, vector2D1.getX(), 0.00001);
@@ -353,7 +354,7 @@ public class Vector2DTest {
     public void testStaticNormalizeSmallValues() {
         final Vector2D vector2D1 = new Vector2D(0.5, 0.1);
         final Vector2D vector2D2 = Vector2D.normalize(vector2D1);
-        // Test only if the method is accurate to 5 decimal places
+        
         assertEquals(1, vector2D2.getMag(), 0.00001);
 
         assertEquals(0.5, vector2D1.getX(), 0.00001);
@@ -363,14 +364,14 @@ public class Vector2DTest {
     @Test
     public void testStaticNormalizeWithValues() {
         final Vector2D vector2D = Vector2D.normalize(5, 3);
-        // Test only if the method is accurate to 5 decimal places
+        
         assertEquals(1, vector2D.getMag(), 0.00001);
     }
 
     @Test
     public void testStaticNormalizeWithSmallValues() {
         final Vector2D vector2D = Vector2D.normalize(0.5, 0.3);
-        // Test only if the method is accurate to 5 decimal places
+        
         assertEquals(1, vector2D.getMag(), 0.00001);
     }
 
@@ -433,7 +434,15 @@ public class Vector2DTest {
     public void testLimit() {
         final Vector2D vector2D = new Vector2D(10, 10);
         vector2D.limit(5);
-        // Test only if the method is accurate to 5 decimal places
+        assertEquals(5, vector2D.getMag(), 0.00001);
+    }
+
+    @Test
+    public void testLimitOnLimit() {
+        final Vector2D vector2D = spy(Vector2D.class);
+        vector2D.setX(5);
+        vector2D.limit(5);
+        verify(vector2D, times(0)).getMag();
         assertEquals(5, vector2D.getMag(), 0.00001);
     }
 
@@ -441,7 +450,6 @@ public class Vector2DTest {
     public void testLimitNotReached() {
         final Vector2D vector2D = new Vector2D(0, 3);
         vector2D.limit(5);
-        // Test only if the method is accurate to 5 decimal places
         assertEquals(3, vector2D.getMag(), 0.00001);
     }
 
@@ -449,7 +457,7 @@ public class Vector2DTest {
     public void testStaticLimit() {
         final Vector2D vector2D1 = new Vector2D(10, 5);
         final Vector2D vector2D2 = Vector2D.limit(vector2D1, 5);
-        // Test only if the method is accurate to 5 decimal places
+        
         assertEquals(5, vector2D2.getMag(), 0.00001);
 
         assertEquals(10, vector2D1.getX(), 0.00001);
@@ -460,7 +468,7 @@ public class Vector2DTest {
     public void testStaticLimitNotReached() {
         final Vector2D vector2D1 = new Vector2D(3, 0);
         final Vector2D vector2D2 = Vector2D.limit(vector2D1, 5);
-        // Test only if the method is accurate to 5 decimal places
+        
         assertEquals(3, vector2D2.getMag(), 0.00001);
 
         assertEquals(3, vector2D1.getX(), 0.00001);
@@ -473,14 +481,14 @@ public class Vector2DTest {
     @Test
     public void testStaticLimitWithValues() {
         final Vector2D vector2D = Vector2D.limit(10, 10, 5);
-        // Test only if the method is accurate to 5 decimal places
+        
         assertEquals(5, vector2D.getMag(), 0.00001);
     }
 
     @Test
     public void testStaticLimitNotReachedWithValues() {
         final Vector2D vector2D = Vector2D.limit(1, 0, 5);
-        // Test only if the method is accurate to 5 decimal places
+        
         assertEquals(1, vector2D.getMag(), 0.00001);
     }
 
