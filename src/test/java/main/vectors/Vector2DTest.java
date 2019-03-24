@@ -11,6 +11,7 @@ import static org.mockito.Mockito.*;
 
 public class Vector2DTest {
     private static final double DELTA = 0.00001;
+    private static final int ZERO = 0;
 
     @Test
     public void testEmptyConstructor() {
@@ -444,7 +445,7 @@ public class Vector2DTest {
         final Vector2D vector2D = spy(Vector2D.class);
         vector2D.setX(5);
         vector2D.limit(5);
-        verify(vector2D, times(0)).setMag(anyDouble());
+        verify(vector2D, times(ZERO)).setMag(anyDouble());
         assertEquals(5, vector2D.getMag(), DELTA);
     }
 
